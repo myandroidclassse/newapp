@@ -1,5 +1,6 @@
 package com.app.bookkeeping;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,8 +19,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+
+        FloatingActionButton btn_add_a_bill = findViewById(R.id.btn_add_a_bill);
+        btn_add_a_bill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -48,5 +51,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void OnClickAdd(){
+        Intent intent = new Intent(MainActivity.this,NewBill.class);
+        startActivity(intent);
+    }
+
+    public void OnClickList(){
+        Intent intent = new Intent(MainActivity.this,MyDetail.class);
+        startActivity(intent);
+    }
+
+    public void OnClickNewAsset(){
+        Intent intent = new Intent(MainActivity.this,NewAsset.class);
+        startActivity(intent);
+
     }
 }
