@@ -32,15 +32,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-<<<<<<< android:Updated
-    android:upstream
-        android:outlineAmbientShadowColor="@android:"
-        app:srcCompat="@android:drawable/ic_input_add" />
-=======
         app:backgroundTint="#778BD9"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="end|bottom"
         app:srcCompat="@android:drawable/stat_notify_more" />
->>>>>>> Stashed changes
 
 </android.support.design.widget.CoordinatorLayout>
