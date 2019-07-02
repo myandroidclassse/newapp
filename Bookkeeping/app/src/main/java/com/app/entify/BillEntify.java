@@ -5,7 +5,7 @@ import java.util.Date;
 public class BillEntify {
     int ID;
     int from;
-    int money;
+    String money;
     Date date;
     int aim;
 
@@ -25,11 +25,11 @@ public class BillEntify {
         this.from = from;
     }
 
-    public int getMoney() {
+    public String getMoney() {
         return money;
     }
 
-    public void setMoney(int money) {
+    public void setMoney(String money) {
         this.money = money;
     }
 
