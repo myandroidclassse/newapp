@@ -18,8 +18,8 @@
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
         app:cardBackgroundColor="#778BD9"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp">
+        app:cardCornerRadius="1dp"
+        app:cardElevation="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -110,9 +110,9 @@
             android:layout_height="wrap_content"
             android:background="#A9C8F6"
             android:gravity="center"
-            android:text="卡片列表"
+            android:text="资产列表"
             android:textColor="@android:color/background_dark"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
 
         <View
             android:layout_width="1dp"
@@ -127,9 +127,9 @@
             android:layout_weight="1"
             android:background="#A9C8F6"
             android:gravity="center"
-            android:text="添加卡片"
+            android:text="添加资产"
             android:textColor="@android:color/background_dark"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -140,13 +140,20 @@
         android:background="#CD000000" />
 
     <ScrollView
+        android:id="@+id/Asset"
         android:layout_width="419dp"
-        android:layout_height="182dp">
+        android:layout_height="194dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/AssetList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
     </ScrollView>
 
     <View
@@ -161,9 +168,9 @@
         android:layout_height="wrap_content"
         android:background="#A9C8F6"
         android:gravity="center"
-        android:text="账单列表"
+        android:text="最近消费账单"
         android:textColor="@android:color/background_dark"
-        android:textSize="22sp" />
+        android:textSize="18sp" />
 
     <View
         android:layout_width="match_parent"
@@ -172,13 +179,20 @@
         android:background="#CD000000" />
 
     <ScrollView
+        android:id="@+id/Bill"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/BillList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>
