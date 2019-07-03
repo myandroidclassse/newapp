@@ -12,7 +12,10 @@ import com.app.entify.AssetsEntify;
 
 import org.w3c.dom.Text;
 
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -49,7 +52,7 @@ public class AccountAdapt extends BaseAdapter {
     public Properties getProperty(String filename){
         Properties properties = new Properties();
         try {
-            properties.load(activity.getAssets().open(filename));
+            properties.load(new BufferedReader(new InputStreamReader(activity.getAssets().open(filename))));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -34,9 +34,9 @@
         android:id="@+id/txt_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_card_money"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="37dp"
         android:text="所属资产" />
 
