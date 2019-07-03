@@ -16,6 +16,7 @@ public class AssetDetail extends Activity {
 
     public void OnClickList(){
         Intent intent = new Intent(AssetDetail.this,MyDetail.class);
+
         startActivity(intent);
     }
 }
