@@ -42,7 +42,7 @@ public class Dao {
 
 
 
-    public double getMoneyFromDate(Date begin,Date end){
+    public double getMoneyFromDate(int type,Date begin,Date end){
         double money = 0;
 
 
