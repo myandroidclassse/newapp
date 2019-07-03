@@ -144,7 +144,7 @@ class NewAsset extends AppCompatActivity {
         asset.setName(name);
         asset.setType(type);
         Dao dao = new Dao();
-        if(dao.addNewAsset(asset)) Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
+        if(dao.addNewAsset(this,asset)) Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
         else Toast.makeText(this,"添加失败，请重试",Toast.LENGTH_SHORT).show();
     }
 }
