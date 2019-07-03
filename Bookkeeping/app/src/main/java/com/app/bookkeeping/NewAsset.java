@@ -128,7 +128,6 @@ class NewAsset extends AppCompatActivity {
     }
 
 
-
     //点击确认按钮后添加账单(缺少数据捕获 by王家淇)
     public void addAsset(){
         AssetsEntify asset = new AssetsEntify();
