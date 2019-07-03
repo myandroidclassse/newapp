@@ -128,7 +128,6 @@ class NewAsset extends AppCompatActivity {
     }
 
 
-
     //点击确认按钮后添加账单(缺少数据捕获 by王家淇)
     public void addAsset(){
         AssetsEntify asset = new AssetsEntify();
@@ -144,7 +143,7 @@ class NewAsset extends AppCompatActivity {
         asset.setName(name);
         asset.setType(type);
         Dao dao = new Dao();
-        if(dao.addNewAsset(this,asset)) Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
+        if(dao.addNewAsset(this,asset)!=-1) Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
         else Toast.makeText(this,"添加失败，请重试",Toast.LENGTH_SHORT).show();
     }
 }
