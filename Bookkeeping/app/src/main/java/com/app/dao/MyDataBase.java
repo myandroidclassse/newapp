@@ -5,6 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.app.entify.AimEntify;
+import com.app.entify.AssetsEntify;
+import com.app.entify.BillEntify;
+
 public class MyDataBase {
 
     public static final String DATABASE_NAME = "Bookkeeping.db";
@@ -41,6 +45,22 @@ public class MyDataBase {
         dbHelper.close();
     }
 
+    //TODO 获取记录总数
+    public int getCout(String tabName,String type){
+        int c = 0;
+        String sql = "";
+
+        sql = "select" + type + "from" + tabName +";";
+        Cursor c1 = mSqliteDatabase.rawQuery(sql,null);
+        if(c1.moveToFirst()){
+            c += 1;
+            while (c1.moveToNext()){
+                c += 1;
+            }
+        }
+
+        return c;
+    }
 
     //TODO 获取assets表的所有记录,以id降序排序
     public Cursor getAssets_desc(){
@@ -51,8 +71,8 @@ public class MyDataBase {
 
     //TODO 获取assets表的所有记录，以升序排序
     public Cursor getAssets__asc(){
-        Cursor c =null;
-
+        String sql = "select * from assets order by _id asc;";
+        Cursor c = mSqliteDatabase.rawQuery(sql,null);
         return c;
     }
 
@@ -70,15 +90,79 @@ public class MyDataBase {
 
     //TODO 获取bill表某项的所有记录，以id降序排序
     public Cursor getBill_desc(String member){
-        Cursor c =null;
+        String sql = "select * assets where " + member + " order by _id desc";
+        Cursor c = mSqliteDatabase.rawQuery(sql,null);
         return c;
     }
 
-    //TODO 获取bill表某项的所有记录，以id升序排序
-    public Cursor getBill_asc(String member){
-        Cursor c =null;
+    //TODO 获取aim表中所有记录,以id降序排序
+    public Cursor getAim_desc(){
+
+        Cursor c = null;
         return c;
     }
+
+    //TODO 获取aim表中某项的所有记录，以id降序排序
+    public Cursor getAim_desc(String member){
+
+        Cursor c = null;
+        return c;
+    }
+
+    //TODO 向表assets中插入数据
+    public int insertAssets(AssetsEntify assets){
+        int id = -1;
+        return id;
+    }
+
+    //TODO 向表bill中插入数据
+    public int insertBill(BillEntify bill){
+        int id = -1;
+        return id;
+    }
+
+    //TODO 向表aim中插入数据
+    public int insertAim(AimEntify aim){
+        int id = -1;
+        return id;
+    }
+
+    //TODO 删除assets表中某id
+    public int delAssets(int id){
+        int sub = 0;
+        return sub;
+    }
+
+    //TODO 删除bill表中某id
+    public int delBill(int id){
+        int sub = 0;
+        return sub;
+    }
+
+    //TODO 删除aim表中某id
+    public int delAim(int id){
+        int sub = 0;
+        return sub;
+    }
+
+    //TODO 更改assets表中某项
+    public int updateAssets(AssetsEntify assetsEntify){
+        int sub = 0;
+        return sub;
+    }
+
+    //TODO 更改bill表中某项
+    public int updateBill(BillEntify billEntify){
+        int sub = 0;
+        return sub;
+    }
+
+    //TODO 更改aim表中某项
+    public int updateAim(AimEntify aimEntify){
+        int sub = 0;
+        return sub;
+    }
+
 
     public MyDataBase(Context context){
         this.context = context;
