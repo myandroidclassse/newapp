@@ -29,10 +29,11 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="false"
                 android:layout_marginStart="26dp"
                 android:layout_marginLeft="26dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 app:srcCompat="@drawable/bank" />
 
             <TextView
@@ -40,9 +41,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="13dp"
-                android:layout_marginLeft="13dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
                 android:layout_toEndOf="@+id/img_choose_bank"
                 android:layout_toRightOf="@+id/img_choose_bank"
                 android:text="普通银行"
@@ -78,7 +79,7 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/edit_name"
             android:layout_width="147dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -135,7 +136,7 @@
             android:textSize="36sp" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/edit_money"
             android:layout_width="244dp"
             android:layout_height="49dp"
             android:layout_alignStart="@+id/textView15"

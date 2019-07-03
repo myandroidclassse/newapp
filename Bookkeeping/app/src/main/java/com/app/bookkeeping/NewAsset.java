@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,7 +25,9 @@ import com.app.Adapt.ChooseList;
 import com.app.dao.Dao;
 import com.app.entify.AssetsEntify;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,11 +39,19 @@ class NewAsset extends AppCompatActivity {
     private TextView choosePhoto;
     private TextView takePhoto;
     private Dialog dialog;
+    TextView bank_type;
+    EditText editname;
+    EditText editmoney;
+    ImageView img_bank;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_account);
         chosose_bank = findViewById(R.id.bank);
+        bank_type = findViewById(R.id.bank_type);
+        editname = findViewById(R.id.edit_name);
+        editmoney = findViewById(R.id.edit_money);
+        img_bank = findViewById(R.id.img_choose_bank);
         setDialog();
 
     }
@@ -62,16 +74,6 @@ class NewAsset extends AppCompatActivity {
                 chooseList.setList(List);
                 final ListView list_of_bank = inflate.findViewById(R.id.choose_list);
                 list_of_bank.setAdapter(chooseList);
-                list_of_bank.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ChooseList alist = (ChooseList) list_of_bank.getAdapter();
-                        String name = alist.getItem(position);
-                        Snackbar.make(view, name, Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                    }
-                });
-
                 //将布局设置给Dialog
                 dialog.setContentView(inflate);
                 //获取当前Activity所在的窗体
@@ -85,6 +87,32 @@ class NewAsset extends AppCompatActivity {
                 //    将属性设置给窗体
                 dialogWindow.setAttributes(lp);
                 dialog.show();//显示对话框
+                list_of_bank.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ChooseList alist = (ChooseList) list_of_bank.getAdapter();
+                        String name = alist.getItem(position);
+                        bank_type.setText(name);
+                        switch (position){
+                            case 1:
+                                img_bank.setImageResource(R.drawable.alipay);
+                                break;
+                            case 2:
+                                img_bank.setImageResource(R.drawable.jianshebank);
+                                break;
+                            case 3:
+                                img_bank.setImageResource(R.drawable.chinabank);
+                                break;
+                            case 4:
+                                img_bank.setImageResource(R.drawable.youzhengbank);
+                                break;
+                            case 5:
+                                img_bank.setImageResource(R.drawable.gongshangbank);
+                                break;
+                        }
+                        dialog.cancel();
+                    }
+                });
             }
         });
     }
@@ -92,12 +120,15 @@ class NewAsset extends AppCompatActivity {
     public Properties getProperty(String filename){
         Properties properties = new Properties();
         try {
-            properties.load(NewAsset.this.getAssets().open(filename));
+            properties.load(new BufferedReader(new InputStreamReader(NewAsset.this.getAssets().open(filename))));
         } catch (IOException e) {
             e.printStackTrace();
         }
         return properties;
     }
+
+
+
     //点击确认按钮后添加账单(缺少数据捕获 by王家淇)
     public void addAsset(){
         AssetsEntify asset = new AssetsEntify();
