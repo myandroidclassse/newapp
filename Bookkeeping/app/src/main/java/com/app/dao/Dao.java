@@ -13,25 +13,73 @@ import java.util.List;
 public class Dao {
     public List<AssetsEntify> getAssets(){
         List<AssetsEntify> Assets = new LinkedList<>();
+        Cursor cursor = null;
 //        DBHelper dbHelper = new DBHelper();
-//        Cursor cursor = dbHelper.getAssets();//获取全部资产列表
-//        if(cursor.moveToFirst()){
-//            for(int i = 0 ; ;i++){
-//                AssetsEntify Asset = new AssetsEntify();
-//                String IDS = cursor.getString(0);
-//                int IDS =
-//            }
-//        }
-
-
+//        cursor = dbHelper.getAssets();//获取全部资产列表
+        if(cursor.moveToFirst()){
+            while (true){
+                AssetsEntify Asset = new AssetsEntify();
+                String IDS = cursor.getString(0);
+                int ID = Integer.valueOf(IDS);
+                String name = cursor.getString(1);
+                String TYPES = cursor.getString(2);
+                int type = Integer.valueOf(TYPES);
+                String money = cursor.getString(3);
+                Asset.setType(type);
+                Asset.setName(name);
+                Asset.setID(ID);
+                Asset.setMoney(money);
+                Assets.add(Asset);
+                if(cursor.moveToNext()) continue;
+                else break;
+            }
+            cursor.close();
+        }
 
 
         return Assets;
     }
 
     //获取账单，参数为想要获取的数量，0则为全部；
-    public List<BillEntify> getBills(int num){
+    public List<BillEntify> getBills(int num ){
         List<BillEntify> Bills = new LinkedList<>();
+        Cursor cursor = null;
+
+
+        if(cursor.moveToFirst()){
+            while (true){
+                BillEntify bill = new BillEntify();
+                String[] get = {""};
+                for (int i = 0; i < 5; i++) {
+                        get[i] = cursor.getString(i);
+                }
+
+
+            }
+        }
+
+
+
+
+
+        return Bills;
+    }
+
+    public List<BillEntify> getBills(int num , int type){
+        List<BillEntify> Bills = new LinkedList<>();
+        Cursor cursor = null;
+
+
+        if(cursor.moveToFirst()){
+            while (true){
+                BillEntify bill = new BillEntify();
+                String[] get = {""};
+                for (int i = 0; i < 5; i++) {
+                    cursor.getString(i);
+
+                }
+            }
+        }
 
 
 
