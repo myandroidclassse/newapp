@@ -1,8 +1,6 @@
 package com.app.Adapt;
 
 import android.app.Activity;
-import android.content.res.AssetManager;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -12,7 +10,6 @@ import com.app.bookkeeping.R;
 import com.app.entify.BillEntify;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -26,13 +23,14 @@ public class BillAdapt extends BaseAdapter {
     }
 
     public void SetList(List<BillEntify> List){
+        List.clear();
         this.List = List;
         this.notifyDataSetChanged();//动态更新视图
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return List.size();
     }
 
     @Override
@@ -42,24 +40,14 @@ public class BillAdapt extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
-    }
-
-    public Properties getAimProperty(){
-        Properties properties = new Properties();
-        try {
-            properties.load(activity.getAssets().open("AimString.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return properties;
+        return position;
     }
 
 
-    public Properties getCardProperty(){
+    public Properties getProperty(String filename){
         Properties properties = new Properties();
         try {
-            properties.load(activity.getAssets().open("CardString.properties"));
+            properties.load(activity.getAssets().open(filename));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -72,10 +60,10 @@ public class BillAdapt extends BaseAdapter {
         TextView txt_aim = v.findViewById(R.id.txt_aim);
         TextView txt_money = v.findViewById(R.id.txt_money);
         TextView txt_card = v.findViewById(R.id.txt_card);
-        Properties Aimproperties = getAimProperty();
-        Properties Cardproperties = getCardProperty();
+        Properties Aimproperties = getProperty("AimString.properties");
+        Properties Cardproperties = getProperty("CardString.properties");
         txt_aim.setText(Aimproperties.getProperty(String.valueOf(List.get(position).getAim())));
-        txt_money.setText(List.get(position).getMoney());
+        txt_money.setText("¥  "+List.get(position).getMoney());
         txt_card.setText(Cardproperties.getProperty(String.valueOf(List.get(position).getFrom())));
         return v;
     }
