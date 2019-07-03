@@ -189,8 +189,10 @@ class NewBill extends Activity {
         bill.setDate(date);
 
         Dao dao = new Dao();
-        if(dao.addNewBill(bill)) Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
+        if(dao.addNewBill(this,bill)!=-1) Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
         else Toast.makeText(this,"添加失败，请重试",Toast.LENGTH_SHORT).show();
 
+        finish();
     }
+
 }
