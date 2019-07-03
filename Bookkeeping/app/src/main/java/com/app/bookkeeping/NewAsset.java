@@ -1,6 +1,8 @@
 package com.app.bookkeeping;
 
-import android.app.Activity;
+
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -9,16 +11,12 @@ import com.app.entify.AssetsEntify;
 
 import java.util.Date;
 
-class NewAsset extends Activity {
+class NewAsset extends AppCompatActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_account);
-
     }
-
-
-
 
     //点击确认按钮后添加账单(缺少数据捕获 by王家淇)
     public void addAsset(){
