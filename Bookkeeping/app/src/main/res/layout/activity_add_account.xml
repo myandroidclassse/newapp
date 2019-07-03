@@ -70,10 +70,12 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="false"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
 
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
             android:text="备注信息"
             android:textColor="@android:color/black"
             android:textSize="24sp" />
@@ -137,7 +139,7 @@
 
         <EditText
             android:id="@+id/edit_money"
-            android:layout_width="244dp"
+            android:layout_width="240dp"
             android:layout_height="49dp"
             android:layout_alignStart="@+id/textView15"
             android:layout_alignLeft="@+id/textView15"
@@ -147,7 +149,7 @@
             android:background="@null"
             android:ems="10"
             android:hint="0.00"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:textSize="36sp" />
     </RelativeLayout>
 
@@ -173,7 +175,7 @@
         android:background="#E7EAEB" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_add_asset_save"
         android:layout_width="380dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -198,7 +200,7 @@
         android:background="#E7EAEB" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_add_asset_qiut"
         android:layout_width="380dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

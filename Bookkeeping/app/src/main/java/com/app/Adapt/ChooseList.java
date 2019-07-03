@@ -20,6 +20,7 @@ public class ChooseList extends BaseAdapter {
 
 
     public void setList( List<String> List){
+        List.clear();
         this.List = List;
         this.notifyDataSetChanged();//动态更新视图
     }
@@ -47,9 +48,11 @@ public class ChooseList extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View adapt = View.inflate(activity,R.layout.choose_list_adapt,null);
         TextView name = adapt.findViewById(R.id.txt_list_bank_name);
-        Log.d("测试点Chooselist,当前下标",String.valueOf(position));
         ImageView imageView = adapt.findViewById(R.id.img_list);
         switch (position){
+            case 0:
+                imageView.setImageResource(R.drawable.bank);
+                break;
             case 1:
                 imageView.setImageResource(R.drawable.alipay);
                 break;

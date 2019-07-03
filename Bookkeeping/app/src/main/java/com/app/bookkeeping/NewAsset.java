@@ -3,20 +3,18 @@ package com.app.bookkeeping;
 
 import android.app.Dialog;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,37 +26,49 @@ import com.app.entify.AssetsEntify;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
 class NewAsset extends AppCompatActivity {
-    CardView chosose_bank;
+    CardView choose_bank;
     private View inflate;
-    private TextView choosePhoto;
-    private TextView takePhoto;
     private Dialog dialog;
     TextView bank_type;
     EditText editname;
     EditText editmoney;
     ImageView img_bank;
+    Button save,qiut;
+    int type;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_account);
-        chosose_bank = findViewById(R.id.bank);
+        choose_bank = findViewById(R.id.bank);
         bank_type = findViewById(R.id.bank_type);
         editname = findViewById(R.id.edit_name);
         editmoney = findViewById(R.id.edit_money);
         img_bank = findViewById(R.id.img_choose_bank);
+        save = findViewById(R.id.btn_add_asset_save);
+        qiut = findViewById(R.id.btn_add_asset_qiut);
         setDialog();
-
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addAsset();
+            }
+        });
+        qiut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 
     public void setDialog(){
-        chosose_bank.setOnClickListener(new View.OnClickListener() {
+        choose_bank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog = new Dialog(NewAsset.this,R.style.ActionSheetDialogStyle);
@@ -94,6 +104,9 @@ class NewAsset extends AppCompatActivity {
                         String name = alist.getItem(position);
                         bank_type.setText(name);
                         switch (position){
+                            case 0:
+                                img_bank.setImageResource(R.drawable.bank);
+                                break;
                             case 1:
                                 img_bank.setImageResource(R.drawable.alipay);
                                 break;
@@ -110,6 +123,7 @@ class NewAsset extends AppCompatActivity {
                                 img_bank.setImageResource(R.drawable.gongshangbank);
                                 break;
                         }
+                        type = position;
                         dialog.cancel();
                     }
                 });
@@ -132,19 +146,16 @@ class NewAsset extends AppCompatActivity {
     //点击确认按钮后添加账单(缺少数据捕获 by王家淇)
     public void addAsset(){
         AssetsEntify asset = new AssetsEntify();
-        String name = "";
-        int from = 0;
-        int type = 0;
-        String money = "";
-
-
-
-
-        asset.setMoney(money);
-        asset.setName(name);
+        asset.setName(editname.getText().toString());
         asset.setType(type);
+        asset.setMoney(editmoney.getText().toString());
         Dao dao = new Dao();
-        if(dao.addNewAsset(asset)) Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
-        else Toast.makeText(this,"添加失败，请重试",Toast.LENGTH_SHORT).show();
+        if(dao.addNewAsset(asset)) {
+            Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        else {
+            Toast.makeText(this,"添加失败，请重试",Toast.LENGTH_SHORT).show();
+        }
     }
 }
