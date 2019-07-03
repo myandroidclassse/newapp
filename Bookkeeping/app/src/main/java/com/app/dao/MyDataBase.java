@@ -13,10 +13,18 @@ public class MyDataBase {
     public static final String TABLE_NAME_AIM = "aim";
     public static final String TABLE_NAME_BILL = "bill";
 
-    public static final String SQL_CREATE_TABLE_ASSETS = "create table"
+    public static final String SQL_CREATE_TABLE_ASSETS = "create table "
             + TABLE_NAME_ASSETS + "("
             +"_id INTEGER primary key autoincrement," + "_name TEXT,"
-            +"__type ";
+            +"_type INTEGER," + "_money TEXT" + ");";
+    public static final String SQL_CREATE_TABLE_BILL = "create table "
+            + TABLE_NAME_BILL+ "("
+            +"_id INTEGER primary key autoincrement," + "_from INTEGER,"
+            +"_money TEXT," + "_date TEXT," +  "_aim INTEGER" + ");";
+    public static final String SQL_CREATE_TABLE_AIM= "create table "
+            + TABLE_NAME_AIM + "("
+            +"_id INTEGER primary key autoincrement," + "_type INTEGER,"
+            +"_money TEXT," + "_date TEXT" + ");";
 
     private Context context;
     private DatabaseHelper dbHelper;
@@ -60,14 +68,14 @@ public class MyDataBase {
         return c;
     }
 
-    //TODO 获取bill表from的所有记录，以id降序排序
-    public Cursor getBill_desc(int from){
+    //TODO 获取bill表某项的所有记录，以id降序排序
+    public Cursor getBill_desc(String member){
         Cursor c =null;
         return c;
     }
 
-    //TODO 获取bill表from的所有记录，以id升序排序
-    public Cursor getBill_asc(int from){
+    //TODO 获取bill表某项的所有记录，以id升序排序
+    public Cursor getBill_asc(String member){
         Cursor c =null;
         return c;
     }
@@ -85,7 +93,9 @@ public class MyDataBase {
        @Override
        public void onCreate(SQLiteDatabase db){
            //创建表
-
+           db.execSQL(SQL_CREATE_TABLE_ASSETS);
+           db.execSQL(SQL_CREATE_TABLE_BILL);
+           db.execSQL(SQL_CREATE_TABLE_AIM);
        }
 
        @Override
