@@ -8,8 +8,25 @@
 
 
     <include
-        android:id="@+id/include"
-        layout="@layout/content_main" />
+        android:id="@+id/include_main"
+        layout="@layout/content_main"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="visible"/>
+
+    <include
+        android:id="@+id/include_list"
+        layout="@layout/activity_alloflist"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone"/>
+
+    <include
+        android:id="@+id/include_special"
+        layout="@layout/activity_specail"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_add_a_bill"
@@ -25,10 +42,12 @@
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:layout_alignParentBottom ="true"
         android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/colorPrimaryDark"
+        app:itemTextColor="#778BD9"
         app:menu="@menu/navigation" />
 
 
