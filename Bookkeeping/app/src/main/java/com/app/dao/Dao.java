@@ -92,7 +92,7 @@ public class Dao {
         Cursor cursor = null;
         MyDataBase dataBase = new MyDataBase(context);
         dataBase.open();
-        cursor = dataBase.getBill_desc(type+"");
+        cursor = dataBase.getBill_desc("_from=\""+type+"\"");
         if(cursor.moveToFirst()){
             for (int j = 0; j < num; j++){
                 BillEntify bill = new BillEntify();
@@ -148,7 +148,8 @@ public class Dao {
         return money;
     }
 
-    public boolean addNewBill(Context context,BillEntify bill){
+    public int addNewBill(Context context,BillEntify bill){
+        int ID = 0;
         MyDataBase dataBase = new MyDataBase(context);
         dataBase.open();
 
@@ -157,10 +158,11 @@ public class Dao {
 
 
         dataBase.close();
-        return true;
+        return ID;
     }
 
-    public boolean addNewAsset(Context context,AssetsEntify asset){
+    public int addNewAsset(Context context,AssetsEntify asset){
+        int ID = 0;
         MyDataBase dataBase = new MyDataBase(context);
         dataBase.open();
 
@@ -169,10 +171,11 @@ public class Dao {
 
 
         dataBase.close();
-        return true;
+        return ID;
     }
 
-    public boolean addNewAim(Context context,AimEntify aim){
+    public int addNewAim(Context context,AimEntify aim){
+        int ID = 0;
         MyDataBase dataBase = new MyDataBase(context);
         dataBase.open();
 
@@ -181,7 +184,7 @@ public class Dao {
 
 
         dataBase.close();
-        return true;
+        return ID;
     }
 
     public int updataBill(Context context,BillEntify bill){
@@ -209,7 +212,8 @@ public class Dao {
     }
 
 
-    public void deleteBill(Context context,BillEntify bill){
+    public int deleteBill(Context context,BillEntify bill){
+        int num = 0;
         MyDataBase dataBase = new MyDataBase(context);
         dataBase.open();
 
@@ -218,9 +222,11 @@ public class Dao {
 
 
         dataBase.close();
+        return num;
     }
 
-    public void deleteAsset(Context context,AssetsEntify asset){
+    public int deleteAsset(Context context,AssetsEntify asset){
+        int num = 0;
         MyDataBase dataBase = new MyDataBase(context);
         dataBase.open();
 
@@ -229,6 +235,7 @@ public class Dao {
 
 
         dataBase.close();
+        return num;
     }
 
 
