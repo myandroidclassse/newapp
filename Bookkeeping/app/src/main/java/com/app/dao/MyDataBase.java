@@ -158,7 +158,7 @@ public class MyDataBase {
     public int insertBill(BillEntify bill){
         int id = -1;
         ContentValues values = new ContentValues();
-        values.put(billString[0],bill.getID());
+//        values.put(billString[0],bill.getID());
         values.put(billString[1],bill.getFrom());
         values.put(billString[2],bill.getMoney());
         values.put(billString[3],bill.getDate().toString());
@@ -177,7 +177,7 @@ public class MyDataBase {
     public int insertAim(AimEntify aim){
         int id = -1;
         ContentValues values = new ContentValues();
-        values.put(aimString[0],aim.getID());
+//        values.put(aimString[0],aim.getID());
         values.put(aimString[1],aim.getType());
         values.put(aimString[2],aim.getMoney());
         values.put(aimString[3],aim.getDate().toString());
