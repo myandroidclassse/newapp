@@ -203,8 +203,12 @@ public class Dao {
             Asset.setMoney(newmoney);
             dataBase.updateAssets(Asset);
         }
+<<<<<<< HEAD
         if(bill.getFrom()!=0)
         {
+=======
+        if(bill.getFrom()!=0){
+>>>>>>> master
             Cursor cursor = null;
             AssetsEntify Asset = new AssetsEntify();
             cursor = dataBase.getAssets(0);

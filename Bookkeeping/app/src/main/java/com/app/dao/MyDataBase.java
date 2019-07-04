@@ -95,6 +95,20 @@ public class MyDataBase {
         return c;
     }
 
+    //TODO 获取bill表中某时间段记录
+    public Cursor getAssets(String time1,String time2){
+        String sql = "select * from bill where _date >= " + time1 + " and _date <= " + time2 + " order by _date asc";
+        Cursor cursor = mSqliteDatabase.rawQuery(sql,null);
+        return cursor;
+    }
+
+    //TODO 获取bill表中某时间段的某aim记录
+    public Cursor getAssets(String time1,String time2,int aim){
+        String sql = "select * from bill where _date >= " + time1 + " and _date <= " + time2 + " and _aim = " + aim +" order by _date asc";
+        Cursor cursor = mSqliteDatabase.rawQuery(sql,null);
+        return cursor;
+    }
+
     //TODO 获取bill表的所有记录，以id升序排序
     public Cursor getBill_asc(){
         String sql = "select * from bill order by _id asc;";
@@ -140,11 +154,29 @@ public class MyDataBase {
         return id;
     }
 
+    //TODO 向表assets中插入含id数据
+    public int insertAssets_init(AssetsEntify assets){
+        int id = -1;
+        ContentValues values = new ContentValues();
+        values.put(assetsString[0],assets.getID());
+        values.put(assetsString[1],assets.getName());
+        values.put(assetsString[2],assets.getType());
+        values.put(assetsString[3],assets.getMoney());
+        if(mSqliteDatabase.insert(TABLE_NAME_ASSETS,null,values) != -1){
+            Cursor cursor = getAssets_desc();
+            if(cursor.moveToFirst()){
+                id = cursor.getInt(0);
+                return id;
+            }
+        }
+        return id;
+    }
+
     //TODO 向表bill中插入数据
     public int insertBill(BillEntify bill){
         int id = -1;
         ContentValues values = new ContentValues();
-        values.put(billString[0],bill.getID());
+//        values.put(billString[0],bill.getID());
         values.put(billString[1],bill.getFrom());
         values.put(billString[2],bill.getMoney());
         values.put(billString[3],bill.getDate().toString());
@@ -163,7 +195,7 @@ public class MyDataBase {
     public int insertAim(AimEntify aim){
         int id = -1;
         ContentValues values = new ContentValues();
-        values.put(aimString[0],aim.getID());
+//        values.put(aimString[0],aim.getID());
         values.put(aimString[1],aim.getType());
         values.put(aimString[2],aim.getMoney());
         values.put(aimString[3],aim.getDate().toString());
