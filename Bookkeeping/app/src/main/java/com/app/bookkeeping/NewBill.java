@@ -7,25 +7,19 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -39,16 +33,19 @@ import com.app.entify.BillEntify;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
 class NewBill extends Activity {
+
+    private static TextView txt_year,txt_month,txt_day,txt_hour,txt_minite;
 
     private View inflate;
     private Dialog dialog;
@@ -57,7 +54,7 @@ class NewBill extends Activity {
     TextView bank_name;
     EditText edit_money;
     int type;
-    int aim;
+    int aim = 1;
     Button save;
     Button qiut;
     Button delete;
@@ -78,6 +75,12 @@ class NewBill extends Activity {
         qiut = findViewById(R.id.btn_bill_qiut);
         delete = findViewById(R.id.btn_bill_delete);
         edit_money = findViewById(R.id.edit_money);
+        txt_year = findViewById(R.id.txt_year);
+        txt_month = findViewById(R.id.txt_month);
+        txt_day = findViewById(R.id.txt_day);
+        txt_hour = findViewById(R.id.txt_hour);
+        txt_minite = findViewById(R.id.txt_minite);
+        getCurDate();
         delete.setVisibility(View.GONE);
         setDialog();
         initData();
@@ -92,13 +95,42 @@ class NewBill extends Activity {
         qiut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                finish();
-                Calendar calendar = Calendar.getInstance();
-                showDatePickerDialog(NewBill.this,3,null,calendar);
+                finish();
+
             }
         });
     }
 
+    public static void getCurDate(){
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = sDateFormat.format(new java.util.Date());
+
+        String dt = time.substring(0,time.indexOf('-'));
+        time = time.substring(time.indexOf('-')+1);
+        txt_year.setText(dt);
+        dt = time.substring(0,time.indexOf('-'));
+        time = time.substring(time.indexOf('-')+1);
+        txt_month.setText(dt);
+        dt = time.substring(0,time.indexOf(' '));
+        time = time.substring(time.indexOf(' ')+1);
+        txt_day.setText(dt);
+        dt = time.substring(0,time.indexOf(':'));
+        time = time.substring(time.indexOf(':')+1);
+        txt_hour.setText(dt);
+        dt = time.substring(0,time.indexOf(':'));
+        txt_minite.setText(dt);
+    }
+
+    public void SetDate(View view){
+        Calendar calendar = Calendar.getInstance();
+        showDatePickerDialog(NewBill.this,3,null,calendar);
+    }
+
+
+    public void SetTime(View view){
+        Calendar calendar = Calendar.getInstance();
+        showTimePickerDialog(NewBill.this,3,null,calendar);
+    }
 
     public static void showDatePickerDialog(Activity activity, int themeResId, final TextView tv, Calendar calendar) {
         // 直接创建一个DatePickerDialog对话框实例，并将它显示出来
@@ -107,8 +139,12 @@ class NewBill extends Activity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 // 此处得到选择的时间，可以进行你想要的操作
-                tv.setText("您选择了：" + year + "年" + (monthOfYear+1)+ "月" + dayOfMonth + "日");
-
+//                Log.d("时间测试",String.valueOf(year));
+//                Log.d("时间测试",String.valueOf(monthOfYear+1));
+//                Log.d("时间测试",String.valueOf(dayOfMonth));
+                txt_year.setText(String.valueOf(year));
+                txt_month.setText(String.valueOf(monthOfYear+1));
+                txt_day.setText(String.valueOf(dayOfMonth));
             }
         }
                 // 设置初始日期
@@ -126,7 +162,10 @@ class NewBill extends Activity {
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        tv.setText("您选择了：" + hourOfDay + "时" + minute  + "分");
+//                        Log.d("时间测试",String.valueOf(hourOfDay));
+//                        Log.d("时间测试",String.valueOf(minute));
+                        txt_hour.setText(String.valueOf(hourOfDay));
+                        txt_minite.setText(String.valueOf(minute));
                     }
                 }
                 // 设置初始时间
@@ -236,20 +275,32 @@ class NewBill extends Activity {
         return properties;
     }
 
+    public static long getStringToDate(String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        try{
+            date = dateFormat.parse(dateString);
+        } catch(ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return date.getTime();
+    }
+
     //点击确认按钮后添加账单(缺少数据捕获 by王家淇)
     public void addBill(){
         BillEntify bill = new BillEntify();
-        String money = "";
         Date date = new Date();
-
+        String time = txt_year.getText().toString() + "-" + txt_month.getText().toString() + "-" + txt_day.getText().toString() + " " + txt_hour.getText().toString() + ":" + txt_minite.getText().toString() + ":00";
 
         bill.setMoney(edit_money.getText().toString());
         bill.setAim(aim);
         bill.setFrom(type);
+        date.setTime(getStringToDate(time));
         bill.setDate(date);
 
         Dao dao = new Dao();
-        if(dao.addNewBill(this,bill)!=-1){
+        if(dao.addNewBill(NewBill.this,bill) != -1){
             Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
             finish();
         }
@@ -257,7 +308,7 @@ class NewBill extends Activity {
             Toast.makeText(this,"添加失败，请重试",Toast.LENGTH_SHORT).show();
         }
 
-
     }
+
 
 }
