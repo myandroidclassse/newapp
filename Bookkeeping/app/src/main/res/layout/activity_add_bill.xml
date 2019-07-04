@@ -48,7 +48,7 @@
                 android:layout_marginTop="23dp"
                 android:layout_toEndOf="@+id/bill_img_bank"
                 android:layout_toRightOf="@+id/bill_img_bank"
-                android:text="普通银行"
+                android:text="未指定"
                 android:textColor="@android:color/background_dark"
                 android:textSize="30sp" />
 

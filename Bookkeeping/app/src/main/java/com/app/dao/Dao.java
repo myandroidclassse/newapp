@@ -2,6 +2,7 @@ package com.app.dao;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.app.entify.AimEntify;
 import com.app.entify.AssetsEntify;
