@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,6 +83,7 @@ class NewAsset extends AppCompatActivity {
                 }
                 ChooseList chooseList = new ChooseList(NewAsset.this);
                 chooseList.setList(List);
+
                 final ListView list_of_bank = inflate.findViewById(R.id.choose_list);
                 list_of_bank.setAdapter(chooseList);
                 //将布局设置给Dialog
@@ -89,7 +91,7 @@ class NewAsset extends AppCompatActivity {
                 //获取当前Activity所在的窗体
                 Window dialogWindow = dialog.getWindow();
                 //设置Dialog从窗体底部弹出
-                dialogWindow.setGravity( Gravity.BOTTOM);
+                dialogWindow.setGravity(Gravity.BOTTOM);
                 //获得窗体的属性
                 WindowManager.LayoutParams lp = dialogWindow.getAttributes();
                 lp.y = 0;//设置Dialog距离底部的距离
@@ -149,7 +151,7 @@ class NewAsset extends AppCompatActivity {
         asset.setType(type);
         asset.setMoney(editmoney.getText().toString());
         Dao dao = new Dao();
-        if(dao.addNewAsset(asset)) {
+        if(dao.addNewAsset(NewAsset.this,asset) != -1) {
             Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
             finish();
         }

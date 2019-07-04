@@ -181,8 +181,8 @@ class MyDetail extends Activity {
         bill.setDate(date);
 
         Dao dao = new Dao();
-        if(dao.updataBill(MyDetail.this,bill)==1) Toast.makeText(this,"更新成功",Toast.LENGTH_SHORT).show();
-        else Toast.makeText(this,"修改失败，请重试",Toast.LENGTH_SHORT).show();
+//        if(dao.updataBill(MyDetail.this,bill)==1) Toast.makeText(this,"更新成功",Toast.LENGTH_SHORT).show();
+//        else Toast.makeText(this,"修改失败，请重试",Toast.LENGTH_SHORT).show();
 
     }
 

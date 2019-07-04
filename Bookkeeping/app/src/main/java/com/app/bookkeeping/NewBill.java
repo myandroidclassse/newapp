@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,7 +50,9 @@ class NewBill extends Activity {
     CardView choose_bank;
     ImageView img_bank;
     TextView bank_name;
+    EditText edit_money;
     int type;
+    int aim;
     Button save;
     Button qiut;
     Button delete;
@@ -68,11 +72,24 @@ class NewBill extends Activity {
         save = findViewById(R.id.btn_bill_save);
         qiut = findViewById(R.id.btn_bill_qiut);
         delete = findViewById(R.id.btn_bill_delete);
+        edit_money = findViewById(R.id.edit_money);
         delete.setVisibility(View.GONE);
         setDialog();
         initData();
 
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addBill();
+            }
+        });
 
+        qiut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     void initData() {
@@ -88,6 +105,8 @@ class NewBill extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AimGridAdapt adapt = (AimGridAdapt) gridView.getAdapter();
                 adapt.setLastPosition(position);
+
+                aim = position + 1;
             }
         });
     }
@@ -108,6 +127,7 @@ class NewBill extends Activity {
                 for(int i = 0 ;i<properties.size();i++){
                     List.add(properties.getProperty(String.valueOf(i)));
                 }
+                Log.d("测试点",String.valueOf(List.size()));
                 ChooseList chooseList = new ChooseList(NewBill.this);
                 chooseList.setList(List);
                 final ListView list_of_bank = inflate.findViewById(R.id.choose_list);
@@ -175,24 +195,24 @@ class NewBill extends Activity {
     public void addBill(){
         BillEntify bill = new BillEntify();
         String money = "";
-        int aim = 0;
-        int from = 0;
         Date date = new Date();
 
 
-
-
-
-        bill.setMoney(money);
+        bill.setMoney(edit_money.getText().toString());
         bill.setAim(aim);
-        bill.setFrom(from);
+        bill.setFrom(type);
         bill.setDate(date);
 
         Dao dao = new Dao();
-        if(dao.addNewBill(this,bill)!=-1) Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
-        else Toast.makeText(this,"添加失败，请重试",Toast.LENGTH_SHORT).show();
+        if(dao.addNewBill(this,bill)!=-1){
+            Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        else{
+            Toast.makeText(this,"添加失败，请重试",Toast.LENGTH_SHORT).show();
+        }
 
-        finish();
+
     }
 
 }

@@ -20,7 +20,7 @@ public class ChooseList extends BaseAdapter {
 
 
     public void setList( List<String> List){
-        List.clear();
+        this.List.clear();
         this.List = List;
         this.notifyDataSetChanged();//动态更新视图
     }

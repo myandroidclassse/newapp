@@ -152,7 +152,7 @@ public class Dao {
         MyDataBase dataBase = new MyDataBase(context);
         dataBase.open();
         ID=dataBase.insertBill(bill);
-
+        if(bill.getFrom()!=0)
         {
             Cursor cursor = null;
             AssetsEntify Asset = new AssetsEntify();
@@ -172,7 +172,7 @@ public class Dao {
             Asset.setMoney(newmoney);
             dataBase.updateAssets(Asset);
         }
-        {
+        if(bill.getFrom()!=0){
             Cursor cursor = null;
             AssetsEntify Asset = new AssetsEntify();
             Asset.setID(0);
