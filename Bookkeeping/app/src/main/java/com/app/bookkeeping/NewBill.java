@@ -20,28 +20,21 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.app.Adapt.AccountAdapt;
 import com.app.Adapt.AimGridAdapt;
-import com.app.Adapt.ChooseList;
 import com.app.dao.Dao;
+import com.app.entify.AssetsEntify;
 import com.app.entify.BillEntify;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
 
 class NewBill extends Activity {
 
@@ -59,8 +52,10 @@ class NewBill extends Activity {
     Button qiut;
     Button delete;
     private GridView gridView;
-    private List<Map<String, Object>> dataList;
-    private SimpleAdapter adapter;
+//    private List<Map<String, Object>> dataList;
+//    private SimpleAdapter adapter;
+    int from;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,16 +201,12 @@ class NewBill extends Activity {
                 //填充对话框的布局
                 inflate = LayoutInflater.from(NewBill.this).inflate(R.layout.choose_list, null);
                 //初始化控件
-                Properties properties = getProperty("CardString.properties");
-                List<String> List = new LinkedList<>();
-                for(int i = 0 ;i<properties.size();i++){
-                    List.add(properties.getProperty(String.valueOf(i)));
-                }
-                Log.d("测试点",String.valueOf(List.size()));
-                ChooseList chooseList = new ChooseList(NewBill.this);
-                chooseList.setList(List);
+                Dao dao = new Dao();
+                List<AssetsEntify> List= dao.getAssets(NewBill.this);
+                AccountAdapt accountAdapt = new AccountAdapt(NewBill.this);
+                accountAdapt.setList(List);
                 final ListView list_of_bank = inflate.findViewById(R.id.choose_list);
-                list_of_bank.setAdapter(chooseList);
+                list_of_bank.setAdapter(accountAdapt);
                 //将布局设置给Dialog
                 dialog.setContentView(inflate);
                 //获取当前Activity所在的窗体
@@ -232,10 +223,9 @@ class NewBill extends Activity {
                 list_of_bank.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ChooseList alist = (ChooseList) list_of_bank.getAdapter();
-                        String name = alist.getItem(position);
-                        bank_name.setText(name);
-                        switch (position){
+                        AccountAdapt alist = (AccountAdapt) list_of_bank.getAdapter();
+                        bank_name.setText(alist.getItem(position).getName());
+                        switch (alist.getItem(position).getType()){
                             case 0:
                                 img_bank.setImageResource(R.drawable.bank);
                                 break;
@@ -255,6 +245,7 @@ class NewBill extends Activity {
                                 img_bank.setImageResource(R.drawable.gongshangbank);
                                 break;
                         }
+                        from = alist.getItem(position).getID();
                         type = position;
                         dialog.cancel();
                     }
@@ -265,15 +256,15 @@ class NewBill extends Activity {
 
 
 
-    public Properties getProperty(String filename){
-        Properties properties = new Properties();
-        try {
-            properties.load(new BufferedReader(new InputStreamReader(NewBill.this.getAssets().open(filename))));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return properties;
-    }
+//    public Properties getProperty(String filename){
+//        Properties properties = new Properties();
+//        try {
+//            properties.load(new BufferedReader(new InputStreamReader(NewBill.this.getAssets().open(filename))));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return properties;
+//    }
 
     public static long getStringToDate(String dateString) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -295,10 +286,10 @@ class NewBill extends Activity {
 
         bill.setMoney(edit_money.getText().toString());
         bill.setAim(aim);
-        bill.setFrom(type);
+        bill.setFrom(from);
         date.setTime(getStringToDate(time));
         bill.setDate(date);
-
+        Log.d("测试点",date.toString());
         Dao dao = new Dao();
         if(dao.addNewBill(NewBill.this,bill) != -1){
             Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();

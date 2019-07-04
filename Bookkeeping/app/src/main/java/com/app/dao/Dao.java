@@ -2,6 +2,7 @@ package com.app.dao;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.app.entify.AimEntify;
 import com.app.entify.AssetsEntify;
@@ -56,7 +57,7 @@ public class Dao {
         if(cursor.moveToFirst()){
             for (int j = 0; j < num || num==0 ; j++){
                 BillEntify bill = new BillEntify();
-                String[] get = {""};
+                String[] get = new String[10];
                 for (int i = 0; i < 5; i++) {
                         get[i] = cursor.getString(i);
                 }

@@ -12,7 +12,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.app.Adapt.AccountAdapt;
+import com.app.Adapt.BillAdapt;
+import com.app.dao.Dao;
+import com.app.entify.AssetsEntify;
+import com.app.entify.BillEntify;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,10 +38,36 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton btn_add_a_bill;
     View main_activuty,list_activity,specail_activity;
     TextView add_card;
+    ListView AssetList,BillList;
+    AccountAdapt accountAdapt;
+    BillAdapt billAdapt;
+    AssetsEntify allOftheAsset;
     private void init(){
         main_activuty.setVisibility(View.VISIBLE);
         list_activity.setVisibility(View.GONE);
         specail_activity.setVisibility(View.GONE);
+        Dao dao = new Dao();
+        List<AssetsEntify> ListOfAssets;
+        List<BillEntify> ListOfBills;
+        accountAdapt = new AccountAdapt(MainActivity.this);
+        billAdapt = new BillAdapt(MainActivity.this);
+
+
+        ListOfAssets = dao.getAssets(MainActivity.this);
+        ListOfBills = dao.getBills(MainActivity.this,10);
+//        if(ListOfAssets.size() != 0){
+//            allOftheAsset = ListOfAssets.get(0);
+//            ListOfAssets.remove(0);
+//        }
+
+        accountAdapt.setList(ListOfAssets);
+        billAdapt.setList(ListOfBills);
+        billAdapt.setAssetList(ListOfAssets);
+
+        AssetList.setAdapter(accountAdapt);
+        BillList.setAdapter(billAdapt);
+        setListViewHeightBasedOnChildren(AssetList);
+        setListViewHeightBasedOnChildren(BillList);
     }
 
 
@@ -63,6 +102,17 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        AssetList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AccountAdapt accountAdapt = (AccountAdapt)AssetList.getAdapter();
+                AssetsEntify assetsEntify = accountAdapt.getItem(position);
+
+            }
+        });
+
+
         btn_add_a_bill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
                 OnClickNewAsset();
             }
         });
+
+
+
     }
 
 
@@ -92,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.navigation);
         btn_add_a_bill = findViewById(R.id.btn_add_a_bill);
         add_card = findViewById(R.id.txt_add_card);
+        AssetList = findViewById(R.id.AssetList);
+        BillList = findViewById(R.id.BillList);
         init();
         setListen();
 
@@ -135,17 +190,34 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void OnClickAssetDetial(){
+        Intent intent = new Intent(MainActivity.this,AssetDetail.class);
+        startActivity(intent);
+
+    }
 
 
+    public void setListViewHeightBasedOnChildren(ListView listView) {
+        //获取ListView对应的Adapter
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
 
+        int totalHeight = 0;
+        for (int i = 0, len = listAdapter.getCount(); i < len; i++) { //listAdapter.getCount()返回数据项的数目
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0); //计算子项View 的宽高
+            totalHeight += listItem.getMeasuredHeight(); //统计所有子项的总高度
+        }
 
-
-
-
-
-
-
-
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        //listView.getDividerHeight()获取子项间分隔符占用的高度
+        //params.height最后得到整个ListView完整显示需要的高度
+        listView.setLayoutParams(params);
+    }
 
 
 

@@ -151,6 +151,7 @@ class NewAsset extends AppCompatActivity {
         asset.setType(type);
         asset.setMoney(editmoney.getText().toString());
         Dao dao = new Dao();
+
         if(dao.addNewAsset(NewAsset.this,asset) != -1) {
             Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
             finish();
