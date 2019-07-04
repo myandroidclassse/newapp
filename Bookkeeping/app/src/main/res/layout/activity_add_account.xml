@@ -46,7 +46,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_toEndOf="@+id/img_choose_bank"
                 android:layout_toRightOf="@+id/img_choose_bank"
-                android:text="普通银行"
+                android:text="未指定"
                 android:textColor="@android:color/background_dark"
                 android:textSize="30sp" />
         </RelativeLayout>

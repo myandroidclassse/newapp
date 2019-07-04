@@ -2,7 +2,9 @@ package com.app.bookkeeping;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.Gravity;
@@ -12,41 +14,50 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.TimePicker;
 
+import com.app.Adapt.AccountAdapt;
 import com.app.Adapt.AimGridAdapt;
-import com.app.Adapt.ChooseList;
 import com.app.dao.Dao;
+import com.app.entify.AssetsEntify;
 import com.app.entify.BillEntify;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 class MyDetail extends Activity {
+
+    private static TextView txt_year,txt_month,txt_day,txt_hour,txt_minite;
 
     private View inflate;
     private Dialog dialog;
     CardView choose_bank;
     ImageView img_bank;
     TextView bank_name;
+    EditText edit_money;
     int type;
+    int aim = 1;
     Button save;
     Button qiut;
     Button delete;
     private GridView gridView;
-    private List<Map<String, Object>> dataList;
-    private SimpleAdapter adapter;
+//    private List<Map<String, Object>> dataList;
+//    private SimpleAdapter adapter;
+    int from;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +71,106 @@ class MyDetail extends Activity {
         save = findViewById(R.id.btn_bill_save);
         qiut = findViewById(R.id.btn_bill_qiut);
         delete = findViewById(R.id.btn_bill_delete);
+        edit_money = findViewById(R.id.edit_money);
+        txt_year = findViewById(R.id.txt_year);
+        txt_month = findViewById(R.id.txt_month);
+        txt_day = findViewById(R.id.txt_day);
+        txt_hour = findViewById(R.id.txt_hour);
+        txt_minite = findViewById(R.id.txt_minite);
+        getCurDate();
         setDialog();
         initData();
 
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updataBill();
+            }
+        });
+
+        qiut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+
+            }
+        });
     }
+
+    public static void getCurDate(){
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = sDateFormat.format(new java.util.Date());
+
+        String dt = time.substring(0,time.indexOf('-'));
+        time = time.substring(time.indexOf('-')+1);
+        txt_year.setText(dt);
+        dt = time.substring(0,time.indexOf('-'));
+        time = time.substring(time.indexOf('-')+1);
+        txt_month.setText(dt);
+        dt = time.substring(0,time.indexOf(' '));
+        time = time.substring(time.indexOf(' ')+1);
+        txt_day.setText(dt);
+        dt = time.substring(0,time.indexOf(':'));
+        time = time.substring(time.indexOf(':')+1);
+        txt_hour.setText(dt);
+        dt = time.substring(0,time.indexOf(':'));
+        txt_minite.setText(dt);
+    }
+
+    public void SetDate(View view){
+        Calendar calendar = Calendar.getInstance();
+        showDatePickerDialog(MyDetail.this,3,null,calendar);
+    }
+
+
+    public void SetTime(View view){
+        Calendar calendar = Calendar.getInstance();
+        showTimePickerDialog(MyDetail.this,3,null,calendar);
+    }
+
+    public static void showDatePickerDialog(Activity activity, int themeResId, final TextView tv, Calendar calendar) {
+        // 直接创建一个DatePickerDialog对话框实例，并将它显示出来
+        new DatePickerDialog(activity , themeResId,new DatePickerDialog.OnDateSetListener() {
+            // 绑定监听器(How the parent is notified that the date is set.)
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // 此处得到选择的时间，可以进行你想要的操作
+//                Log.d("时间测试",String.valueOf(year));
+//                Log.d("时间测试",String.valueOf(monthOfYear+1));
+//                Log.d("时间测试",String.valueOf(dayOfMonth));
+                txt_year.setText(String.valueOf(year));
+                txt_month.setText(String.valueOf(monthOfYear+1));
+                txt_day.setText(String.valueOf(dayOfMonth));
+            }
+        }
+                // 设置初始日期
+                ,calendar.get(Calendar.YEAR)
+                ,calendar.get(Calendar.MONTH)
+                ,calendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
+    public static void showTimePickerDialog(Activity activity,int themeResId, final TextView tv, Calendar calendar) {
+        // Calendar c = Calendar.getInstance();
+        // 创建一个TimePickerDialog实例，并把它显示出来
+        // 解释一哈，Activity是context的子类
+        new TimePickerDialog( activity,themeResId,
+                // 绑定监听器
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//                        Log.d("时间测试",String.valueOf(hourOfDay));
+//                        Log.d("时间测试",String.valueOf(minute));
+                        txt_hour.setText(String.valueOf(hourOfDay));
+                        txt_minite.setText(String.valueOf(minute));
+                    }
+                }
+                // 设置初始时间
+                , calendar.get(Calendar.HOUR_OF_DAY)
+                , calendar.get(Calendar.MINUTE)
+                // true表示采用24小时制
+                ,true).show();
+    }
+
 
     void initData() {
         AimGridAdapt aimGridAdapt = new AimGridAdapt(MyDetail.this);
@@ -78,6 +185,8 @@ class MyDetail extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AimGridAdapt adapt = (AimGridAdapt) gridView.getAdapter();
                 adapt.setLastPosition(position);
+
+                aim = position + 1;
             }
         });
     }
@@ -93,15 +202,12 @@ class MyDetail extends Activity {
                 //填充对话框的布局
                 inflate = LayoutInflater.from(MyDetail.this).inflate(R.layout.choose_list, null);
                 //初始化控件
-                Properties properties = getProperty("CardString.properties");
-                List<String> List = new LinkedList<>();
-                for(int i = 0 ;i<properties.size();i++){
-                    List.add(properties.getProperty(String.valueOf(i)));
-                }
-                ChooseList chooseList = new ChooseList(MyDetail.this);
-                chooseList.setList(List);
+                Dao dao = new Dao();
+                List<AssetsEntify> List= dao.getAssets(MyDetail.this);
+                AccountAdapt accountAdapt = new AccountAdapt(MyDetail.this);
+                accountAdapt.setList(List);
                 final ListView list_of_bank = inflate.findViewById(R.id.choose_list);
-                list_of_bank.setAdapter(chooseList);
+                list_of_bank.setAdapter(accountAdapt);
                 //将布局设置给Dialog
                 dialog.setContentView(inflate);
                 //获取当前Activity所在的窗体
@@ -118,10 +224,9 @@ class MyDetail extends Activity {
                 list_of_bank.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ChooseList alist = (ChooseList) list_of_bank.getAdapter();
-                        String name = alist.getItem(position);
-                        bank_name.setText(name);
-                        switch (position){
+                        AccountAdapt alist = (AccountAdapt) list_of_bank.getAdapter();
+                        bank_name.setText(alist.getItem(position).getName());
+                        switch (alist.getItem(position).getType()){
                             case 0:
                                 img_bank.setImageResource(R.drawable.bank);
                                 break;
@@ -141,6 +246,7 @@ class MyDetail extends Activity {
                                 img_bank.setImageResource(R.drawable.gongshangbank);
                                 break;
                         }
+                        from = alist.getItem(position).getID();
                         type = position;
                         dialog.cancel();
                     }
@@ -151,14 +257,26 @@ class MyDetail extends Activity {
 
 
 
-    public Properties getProperty(String filename){
-        Properties properties = new Properties();
-        try {
-            properties.load(new BufferedReader(new InputStreamReader(MyDetail.this.getAssets().open(filename))));
-        } catch (IOException e) {
+//    public Properties getProperty(String filename){
+//        Properties properties = new Properties();
+//        try {
+//            properties.load(new BufferedReader(new InputStreamReader(MyDetail.this.getAssets().open(filename))));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return properties;
+//    }
+
+    public static long getStringToDate(String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        try{
+            date = dateFormat.parse(dateString);
+        } catch(ParseException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return properties;
+        return date.getTime();
     }
 
 

@@ -29,7 +29,6 @@ public class AccountAdapt extends BaseAdapter {
     }
 
     public void setList(List<AssetsEntify> List){
-        List.clear();
         this.List = List;
         this.notifyDataSetChanged();//动态更新视图
     }
@@ -70,6 +69,9 @@ public class AccountAdapt extends BaseAdapter {
         int img_type = List.get(position).getType();
 
         switch (img_type){
+            case 0:
+                img_bank.setImageResource(R.drawable.bank);
+                break;
             case 1:
                 img_bank.setImageResource(R.drawable.alipay);
                 break;

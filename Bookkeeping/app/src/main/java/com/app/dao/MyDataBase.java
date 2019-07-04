@@ -144,7 +144,7 @@ public class MyDataBase {
     public int insertBill(BillEntify bill){
         int id = -1;
         ContentValues values = new ContentValues();
-        values.put(billString[0],bill.getID());
+//        values.put(billString[0],bill.getID());
         values.put(billString[1],bill.getFrom());
         values.put(billString[2],bill.getMoney());
         values.put(billString[3],bill.getDate().toString());
