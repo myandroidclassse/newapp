@@ -54,7 +54,7 @@ public class Dao {
         dataBase.open();
         cursor = dataBase.getBill_desc();
         if(cursor.moveToFirst()){
-            for (int j = 0; j < num; j++){
+            for (int j = 0; j < num || num==0 ; j++){
                 BillEntify bill = new BillEntify();
                 String[] get = {""};
                 for (int i = 0; i < 5; i++) {
@@ -94,7 +94,7 @@ public class Dao {
         dataBase.open();
         cursor = dataBase.getBill_desc("_from=\""+type+"\"");
         if(cursor.moveToFirst()){
-            for (int j = 0; j < num; j++){
+            for (int j = 0; j < num || num == 0; j++){
                 BillEntify bill = new BillEntify();
                 String[] get = {""};
                 for (int i = 0; i < 5; i++) {
@@ -147,6 +147,28 @@ public class Dao {
         return money;
     }
 
+    public double getMoneyFromDate(Context context,Date begin,Date end){
+        double money = 0;
+        Cursor cursor = null;
+        MyDataBase dataBase = new MyDataBase(context);
+        dataBase.open();
+
+
+        if(cursor.moveToFirst()){
+            while (true){
+                String one = cursor.getString(2);
+                money += Double.valueOf(one);
+
+                if(cursor.moveToNext()) continue;
+                else break;
+            }
+            cursor.close();
+        }
+
+        dataBase.close();
+        return money;
+    }
+
     public int addNewBill(Context context,BillEntify bill){
         int ID = 0;
         MyDataBase dataBase = new MyDataBase(context);
@@ -156,6 +178,7 @@ public class Dao {
         {
             Cursor cursor = null;
             AssetsEntify Asset = new AssetsEntify();
+            cursor = dataBase.getAssets(bill.getFrom());
             Asset.setID(bill.getFrom());
             String money = "";
             if (cursor.moveToFirst()) {
@@ -175,6 +198,7 @@ public class Dao {
         {
             Cursor cursor = null;
             AssetsEntify Asset = new AssetsEntify();
+            cursor = dataBase.getAssets(0);
             Asset.setID(0);
             String money = "";
             if (cursor.moveToFirst()) {
@@ -207,6 +231,7 @@ public class Dao {
         {
             Cursor cursor = null;
             AssetsEntify Asset = new AssetsEntify();
+            cursor = dataBase.getAssets(0);
             Asset.setID(0);
             String money = "";
             if (cursor.moveToFirst()) {
@@ -248,6 +273,7 @@ public class Dao {
 
         {
             Cursor cursor = null;
+            cursor = dataBase.getAssets(bill.getFrom());
             AssetsEntify Asset = new AssetsEntify();
             Asset.setID(bill.getFrom());
             String money = "";
@@ -268,6 +294,7 @@ public class Dao {
         }
         {
             Cursor cursor = null;
+            cursor = dataBase.getAssets(0);
             AssetsEntify Asset = new AssetsEntify();
             Asset.setID(0);
             String money = "";
@@ -300,6 +327,7 @@ public class Dao {
 
         {
             Cursor cursor = null;
+            cursor = dataBase.getAssets(0);
             AssetsEntify Asset = new AssetsEntify();
             Asset.setID(0);
             String money = "";
@@ -333,6 +361,7 @@ public class Dao {
 
         {
             Cursor cursor = null;
+            cursor = dataBase.getAssets(bill.getFrom());
             AssetsEntify Asset = new AssetsEntify();
             Asset.setID(bill.getFrom());
             String money = "";
@@ -353,6 +382,7 @@ public class Dao {
         {
             Cursor cursor = null;
             AssetsEntify Asset = new AssetsEntify();
+            cursor = dataBase.getAssets(0);
             Asset.setID(0);
             String money = "";
             if (cursor.moveToFirst()) {
@@ -384,6 +414,7 @@ public class Dao {
 
         {
             Cursor cursor = null;
+            cursor = dataBase.getAssets(0);
             AssetsEntify Asset = new AssetsEntify();
             Asset.setID(0);
             String money = "";
