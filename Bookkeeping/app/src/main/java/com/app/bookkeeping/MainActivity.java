@@ -66,8 +66,9 @@ public class MainActivity extends AppCompatActivity {
         btn_add_a_bill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                OnClickAdd();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
 
@@ -93,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
         add_card = findViewById(R.id.txt_add_card);
         init();
         setListen();
-
-
 
     }
 
@@ -135,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
 
 
 
