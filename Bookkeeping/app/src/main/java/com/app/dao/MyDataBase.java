@@ -154,6 +154,24 @@ public class MyDataBase {
         return id;
     }
 
+    //TODO 向表assets中插入含id数据
+    public int insertAssets_init(AssetsEntify assets){
+        int id = -1;
+        ContentValues values = new ContentValues();
+        values.put(assetsString[0],assets.getID());
+        values.put(assetsString[1],assets.getName());
+        values.put(assetsString[2],assets.getType());
+        values.put(assetsString[3],assets.getMoney());
+        if(mSqliteDatabase.insert(TABLE_NAME_ASSETS,null,values) != -1){
+            Cursor cursor = getAssets_desc();
+            if(cursor.moveToFirst()){
+                id = cursor.getInt(0);
+                return id;
+            }
+        }
+        return id;
+    }
+
     //TODO 向表bill中插入数据
     public int insertBill(BillEntify bill){
         int id = -1;
