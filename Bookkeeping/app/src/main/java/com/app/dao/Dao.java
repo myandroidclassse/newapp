@@ -59,7 +59,7 @@ public class Dao {
                 BillEntify bill = new BillEntify();
                 String[] get = new String[10];
                 for (int i = 0; i < 5; i++) {
-                        get[i] = cursor.getString(i);
+                    get[i] = cursor.getString(i);
                 }
                 int ID = Integer.valueOf(get[0]);
                 bill.setID(ID);
@@ -204,12 +204,8 @@ public class Dao {
             Asset.setMoney(newmoney);
             dataBase.updateAssets(Asset);
         }
-<<<<<<< HEAD
         if(bill.getFrom()!=0)
         {
-=======
-        if(bill.getFrom()!=0){
->>>>>>> master
             Cursor cursor = null;
             AssetsEntify Asset = new AssetsEntify();
             cursor = dataBase.getAssets(0);
@@ -465,7 +461,7 @@ public class Dao {
         asset.setName("all assets's sub");
         asset.setType(0);
         if(cursor.equals(null)){
-            dataBase.insertAssets(asset);
+            dataBase.insertAssets_init(asset);
         }
     }
 
