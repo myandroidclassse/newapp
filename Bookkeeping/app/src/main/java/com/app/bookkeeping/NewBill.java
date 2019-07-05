@@ -159,8 +159,17 @@ class NewBill extends Activity {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 //                        Log.d("时间测试",String.valueOf(hourOfDay));
 //                        Log.d("时间测试",String.valueOf(minute));
-                        txt_hour.setText(String.valueOf(hourOfDay));
-                        txt_minite.setText(String.valueOf(minute));
+                        if(hourOfDay < 10){
+                            txt_minite.setText("0"+hourOfDay);
+                        }else {
+                            txt_minite.setText(String.valueOf(hourOfDay));
+                        }
+                        if(minute < 10){
+                            txt_minite.setText("0"+minute);
+                        }else{
+                            txt_minite.setText(String.valueOf(minute));
+                        }
+
                     }
                 }
                 // 设置初始时间

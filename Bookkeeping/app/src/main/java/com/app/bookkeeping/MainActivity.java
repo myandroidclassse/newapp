@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton btn_add_a_bill;
     View main_activuty,list_activity,specail_activity;
     TextView add_card;
-    ListView AssetList,BillList;
+    ListView AssetList,BillList,AllBills;
     AccountAdapt accountAdapt;
-    BillAdapt billAdapt;
+    BillAdapt billAdapt,AllBillAdapt;
     AssetsEntify allOftheAsset;
     private void init(){
         main_activuty.setVisibility(View.VISIBLE);
@@ -46,20 +46,24 @@ public class MainActivity extends AppCompatActivity {
         Dao dao = new Dao();
         List<AssetsEntify> ListOfAssets;
         List<BillEntify> ListOfBills;
+        List<BillEntify> ListOfAllBills;
         accountAdapt = new AccountAdapt(MainActivity.this);
         billAdapt = new BillAdapt(MainActivity.this);
-
+        AllBillAdapt = new BillAdapt(MainActivity.this);
 
         ListOfAssets = dao.getAssets(MainActivity.this);
         ListOfBills = dao.getBills(MainActivity.this,10);
-//        if(ListOfAssets.size() != 0){
-//            allOftheAsset = ListOfAssets.get(0);
-//            ListOfAssets.remove(0);
-//        }
+        ListOfAllBills = dao.getBills(MainActivity.this,0);
+        if(ListOfAssets.size() != 0){
+            allOftheAsset = ListOfAssets.get(0);
+            ListOfAssets.remove(0);
+        }
 
         accountAdapt.setList(ListOfAssets);
         billAdapt.setList(ListOfBills);
         billAdapt.setAssetList(ListOfAssets);
+        AllBillAdapt.setList(ListOfAllBills);
+        AllBillAdapt.setAssetList(ListOfAssets);
 
         AssetList.setAdapter(accountAdapt);
         BillList.setAdapter(billAdapt);
@@ -170,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
         add_card = findViewById(R.id.txt_add_card);
         AssetList = findViewById(R.id.AssetList);
         BillList = findViewById(R.id.BillList);
+        AllBills = findViewById(R.id.Billlist_of_all);
         init();
         setListen();
         Dao dao = new Dao();

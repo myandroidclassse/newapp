@@ -465,9 +465,7 @@ public class Dao {
         asset.setID(0);
         asset.setName("all assets's sub");
         asset.setType(0);
-        if(cursor.equals(null)){
-            dataBase.insertAssets_init(asset);
-        }
+        dataBase.insertAssets_init(asset);
         dataBase.close();
     }
 
