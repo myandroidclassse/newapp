@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     final static int SPECAIL_ACTIVITY = 3;
 
     private int the_activity = 1;
+
     BottomNavigationView bottomNavigationView;
     FloatingActionButton btn_add_a_bill;
     View main_activuty,list_activity,specail_activity;
@@ -40,36 +41,49 @@ public class MainActivity extends AppCompatActivity {
     BillAdapt billAdapt,AllBillAdapt;
     AssetsEntify allOftheAsset;
     private void init(){
-        main_activuty.setVisibility(View.VISIBLE);
-        list_activity.setVisibility(View.GONE);
-        specail_activity.setVisibility(View.GONE);
-        Dao dao = new Dao();
-        List<AssetsEntify> ListOfAssets;
-        List<BillEntify> ListOfBills;
-        List<BillEntify> ListOfAllBills;
-        accountAdapt = new AccountAdapt(MainActivity.this);
-        billAdapt = new BillAdapt(MainActivity.this);
-        AllBillAdapt = new BillAdapt(MainActivity.this);
 
-        ListOfAssets = dao.getAssets(MainActivity.this);
-        ListOfBills = dao.getBills(MainActivity.this,10);
-        ListOfAllBills = dao.getBills(MainActivity.this,0);
-        if(ListOfAssets.size() != 0){
-            allOftheAsset = ListOfAssets.get(0);
-            ListOfAssets.remove(0);
+        if(the_activity == MIAN_ACTIVITY){
+            Dao dao = new Dao();
+            List<AssetsEntify> ListOfAssets;
+            List<BillEntify> ListOfBills;
+
+            accountAdapt = new AccountAdapt(MainActivity.this);
+            billAdapt = new BillAdapt(MainActivity.this);
+
+
+            ListOfAssets = dao.getAssets(MainActivity.this);
+            ListOfBills = dao.getBills(MainActivity.this,10);
+
+            if(ListOfAssets.size() != 0){
+                allOftheAsset = ListOfAssets.get(0);
+                ListOfAssets.remove(0);
+            }
+
+            accountAdapt.setList(ListOfAssets);
+            billAdapt.setList(ListOfBills);
+            billAdapt.setAssetList(ListOfAssets);
+
+
+            AssetList.setAdapter(accountAdapt);
+            BillList.setAdapter(billAdapt);
+            setListViewHeightBasedOnChildren(AssetList);
+            setListViewHeightBasedOnChildren(BillList);
+        }else if(the_activity == LIST_ACTIVITY){
+            Dao dao = new Dao();
+            List<AssetsEntify> ListOfAssets;
+            List<BillEntify> ListOfAllBills;
+            AllBillAdapt = new BillAdapt(MainActivity.this);
+            ListOfAssets = dao.getAssets(MainActivity.this);
+            ListOfAllBills = dao.getBills(MainActivity.this,0);
+            AllBillAdapt.setList(ListOfAllBills);
+            AllBillAdapt.setAssetList(ListOfAssets);
+
+            AllBills.setAdapter(AllBillAdapt);
         }
 
-        accountAdapt.setList(ListOfAssets);
-        billAdapt.setList(ListOfBills);
-        billAdapt.setAssetList(ListOfAssets);
-        AllBillAdapt.setList(ListOfAllBills);
-        AllBillAdapt.setAssetList(ListOfAssets);
-
-        AssetList.setAdapter(accountAdapt);
-        BillList.setAdapter(billAdapt);
-        setListViewHeightBasedOnChildren(AssetList);
-        setListViewHeightBasedOnChildren(BillList);
     }
+
+
 
 
     public void setListen(){
@@ -90,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                         list_activity.setVisibility(View.VISIBLE);
                         specail_activity.setVisibility(View.GONE);
                         the_activity = LIST_ACTIVITY;
+                        init();
                         btn_add_a_bill.setVisibility(View.VISIBLE);
                         break;
                     case R.id.navigation_special:
@@ -97,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                         list_activity.setVisibility(View.GONE);
                         specail_activity.setVisibility(View.VISIBLE);
                         the_activity = SPECAIL_ACTIVITY;
+                        init();
                         btn_add_a_bill.setVisibility(View.GONE);
                         break;
                 }
@@ -121,8 +137,10 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 BillAdapt billAdapt = (BillAdapt)BillList.getAdapter();
                 BillEntify billEntify = billAdapt.getItem(position);
+                AssetsEntify assetsEntify = billAdapt.getAsset(position);
                 Intent intent = new Intent(MainActivity.this,MyDetail.class);
                 intent.putExtra("Bill",billEntify);
+                intent.putExtra("Asset",assetsEntify);
                 startActivity(intent);
             }
         });

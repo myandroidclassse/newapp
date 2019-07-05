@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.app.Adapt.AccountAdapt;
 import com.app.Adapt.AimGridAdapt;
@@ -54,11 +55,9 @@ class MyDetail extends Activity {
     Button qiut;
     Button delete;
     private GridView gridView;
-//    private List<Map<String, Object>> dataList;
-//    private SimpleAdapter adapter;
     int from;
     BillEntify Bill;
-
+    AssetsEntify Asset;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +77,7 @@ class MyDetail extends Activity {
         txt_hour = findViewById(R.id.txt_hour);
         txt_minite = findViewById(R.id.txt_minite);
         Bill = (BillEntify)getIntent().getSerializableExtra("Bill");
+        Asset = (AssetsEntify)getIntent().getSerializableExtra("Asset");
         getCurDate();
         setDialog();
         initData();
@@ -94,6 +94,13 @@ class MyDetail extends Activity {
             public void onClick(View v) {
                 finish();
 
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteBill();
             }
         });
     }
@@ -176,10 +183,32 @@ class MyDetail extends Activity {
     void initData() {
         AimGridAdapt aimGridAdapt = new AimGridAdapt(MyDetail.this);
         aimGridAdapt.setList();
+
+        switch (Asset.getType()){
+            case 0:
+                img_bank.setImageResource(R.drawable.bank);
+                break;
+            case 1:
+                img_bank.setImageResource(R.drawable.alipay);
+                break;
+            case 2:
+                img_bank.setImageResource(R.drawable.jianshebank);
+                break;
+            case 3:
+                img_bank.setImageResource(R.drawable.chinabank);
+                break;
+            case 4:
+                img_bank.setImageResource(R.drawable.youzhengbank);
+                break;
+            case 5:
+                img_bank.setImageResource(R.drawable.gongshangbank);
+                break;
+        }
+        bank_name.setText(Asset.getName());
+        edit_money.setHint(Bill.getMoney());
+        aimGridAdapt.setLastPosition(Bill.getAim()-1);
+
         gridView.setAdapter(aimGridAdapt);
-
-
-
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
@@ -300,22 +329,22 @@ class MyDetail extends Activity {
         bill.setDate(date);
 
         Dao dao = new Dao();
-//        if(dao.updataBill(MyDetail.this,bill)==1) Toast.makeText(this,"更新成功",Toast.LENGTH_SHORT).show();
-//        else Toast.makeText(this,"修改失败，请重试",Toast.LENGTH_SHORT).show();
+        if(dao.updataBill(MyDetail.this,bill,Bill.getMoney()) != -1){
+            Toast.makeText(this,"更新成功",Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        else {
+            Toast.makeText(this,"修改失败，请重试",Toast.LENGTH_SHORT).show();
+        }
 
     }
 
     public void deleteBill(){
         BillEntify bill = new BillEntify();
-        int ID = 0;
-
-
-
-
-        bill.setID(ID);
+        bill.setID(Bill.getID());
         Dao dao = new Dao();
         dao.deleteBill(this,bill);
-
+        finish();
     }
 
 }

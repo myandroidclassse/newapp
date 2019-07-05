@@ -214,6 +214,7 @@ class NewBill extends Activity {
                 Dao dao = new Dao();
                 List<AssetsEntify> List= dao.getAssets(NewBill.this);
                 AccountAdapt accountAdapt = new AccountAdapt(NewBill.this);
+                List.remove(0);
                 accountAdapt.setList(List);
                 final ListView list_of_bank = inflate.findViewById(R.id.choose_list);
                 list_of_bank.setAdapter(accountAdapt);
