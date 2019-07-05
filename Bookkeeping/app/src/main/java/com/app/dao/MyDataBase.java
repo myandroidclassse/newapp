@@ -238,7 +238,7 @@ public class MyDataBase {
         int sub = 0;
         String selection = "_id = '" + assetsEntify.getID() + "'";
         ContentValues values = new ContentValues();
-        values.put(assetsString[0],assetsEntify.getID());
+//        values.put(assetsString[0],assetsEntify.getID());
         values.put(assetsString[1],assetsEntify.getName());
         values.put(assetsString[2],assetsEntify.getType());
         values.put(assetsString[3],assetsEntify.getMoney());
@@ -251,7 +251,7 @@ public class MyDataBase {
         int sub = 0;
         String selection = "_id = '" + billEntify.getID() + "'";
         ContentValues values = new ContentValues();
-        values.put(billString[0],billEntify.getID());
+//        values.put(billString[0],billEntify.getID());
         values.put(billString[1],billEntify.getFrom());
         values.put(billString[2],billEntify.getMoney());
         values.put(billString[3],billEntify.getDateString());
@@ -265,7 +265,7 @@ public class MyDataBase {
         int sub = 0;
         String selection = "_id = '" + aimEntify.getID() + "'";
         ContentValues values = new ContentValues();
-        values.put(aimString[0],aimEntify.getID());
+//        values.put(aimString[0],aimEntify.getID());
         values.put(aimString[1],aimEntify.getType());
         values.put(aimString[2],aimEntify.getMoney());
         values.put(aimString[3],aimEntify.getDateString());

@@ -286,7 +286,8 @@ public class Dao {
     public int updataBill(Context context,BillEntify bill,String moneyed){
         MyDataBase dataBase = new MyDataBase(context);
         dataBase.open();
-        dataBase.updateBill(bill);
+        Log.w("wjqaea:",bill.getID()+"");
+        int sub = dataBase.updateBill(bill);
 
         if(bill.getFrom()!=0)
         {
@@ -336,13 +337,13 @@ public class Dao {
 
 
         dataBase.close();
-        return 1;
+        return sub;
     }
 
     public int updataAsset(Context context,AssetsEntify asset , String moneyed){
         MyDataBase dataBase = new MyDataBase(context);
         dataBase.open();
-        dataBase.updateAssets(asset);
+        int sub = dataBase.updateAssets(asset);
 
         {
             Cursor cursor = null;
@@ -368,7 +369,7 @@ public class Dao {
 
 
         dataBase.close();
-        return 1;
+        return sub;
     }
 
 
@@ -376,7 +377,7 @@ public class Dao {
         int num = 0;
         MyDataBase dataBase = new MyDataBase(context);
         dataBase.open();
-        dataBase.delBill(bill.getID());
+        num = dataBase.delBill(bill.getID());
         if(bill.getFrom()!=0)
         {
             Cursor cursor = null;
@@ -430,7 +431,7 @@ public class Dao {
         int num = 0;
         MyDataBase dataBase = new MyDataBase(context);
         dataBase.open();
-        dataBase.delAssets(asset.getID());
+        num = dataBase.delAssets(asset.getID());
 
         {
             Cursor cursor = null;
@@ -469,9 +470,7 @@ public class Dao {
         asset.setID(0);
         asset.setName("all assets's sub");
         asset.setType(0);
-        if(cursor.equals(null)){
-            dataBase.insertAssets_init(asset);
-        }
+        dataBase.insertAssets_init(asset);
         dataBase.close();
     }
 
@@ -533,6 +532,51 @@ public class Dao {
 
         dataBase.close();
         return money;
+    }
+
+    public void addMoney(MyDataBase dataBase,int asset,double moneyed){
+
+        Cursor cursor = null;
+        cursor = dataBase.getAssets(asset);
+        AssetsEntify Asset = new AssetsEntify();
+        Asset.setID(asset);
+        String money = "";
+        if (cursor.moveToFirst()) {
+            String name = cursor.getString(1);
+            String TYPES = cursor.getString(2);
+            int type = Integer.valueOf(TYPES);
+            money = cursor.getString(3);
+            Asset.setType(type);
+            Asset.setName(name);
+            cursor.close();
+        }
+        double moneys = Double.valueOf(money) + moneyed;
+        String newmoney = moneys + "";
+        Asset.setMoney(newmoney);
+        dataBase.updateAssets(Asset);
+
+    }
+    public void desMoney(MyDataBase dataBase,int asset,double moneyed){
+
+        Cursor cursor = null;
+        cursor = dataBase.getAssets(asset);
+        AssetsEntify Asset = new AssetsEntify();
+        Asset.setID(asset);
+        String money = "";
+        if (cursor.moveToFirst()) {
+            String name = cursor.getString(1);
+            String TYPES = cursor.getString(2);
+            int type = Integer.valueOf(TYPES);
+            money = cursor.getString(3);
+            Asset.setType(type);
+            Asset.setName(name);
+            cursor.close();
+        }
+        double moneys = Double.valueOf(money) - moneyed;
+        String newmoney = moneys + "";
+        Asset.setMoney(newmoney);
+        dataBase.updateAssets(Asset);
+
     }
 
 }

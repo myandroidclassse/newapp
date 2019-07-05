@@ -160,8 +160,17 @@ class NewBill extends Activity {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 //                        Log.d("时间测试",String.valueOf(hourOfDay));
 //                        Log.d("时间测试",String.valueOf(minute));
-                        txt_hour.setText(String.valueOf(hourOfDay));
-                        txt_minite.setText(String.valueOf(minute));
+                        if(hourOfDay < 10){
+                            txt_minite.setText("0"+hourOfDay);
+                        }else {
+                            txt_minite.setText(String.valueOf(hourOfDay));
+                        }
+                        if(minute < 10){
+                            txt_minite.setText("0"+minute);
+                        }else{
+                            txt_minite.setText(String.valueOf(minute));
+                        }
+
                     }
                 }
                 // 设置初始时间
@@ -205,6 +214,7 @@ class NewBill extends Activity {
                 Dao dao = new Dao();
                 List<AssetsEntify> List= dao.getAssets(NewBill.this);
                 AccountAdapt accountAdapt = new AccountAdapt(NewBill.this);
+                List.remove(0);
                 accountAdapt.setList(List);
                 final ListView list_of_bank = inflate.findViewById(R.id.choose_list);
                 list_of_bank.setAdapter(accountAdapt);
