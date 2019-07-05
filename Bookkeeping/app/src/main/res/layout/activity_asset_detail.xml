@@ -32,7 +32,7 @@
                 android:textSize="26sp" />
 
             <TextView
-                android:id="@+id/txt_money"
+                android:id="@+id/txt_asset_detail_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
