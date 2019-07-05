@@ -35,6 +35,16 @@ public class BillAdapt extends BaseAdapter {
         Assets = List;
     }
 
+
+    public AssetsEntify getAsset(int position){
+        for(int i = 0;i<Assets.size();i++){
+            if(Assets.get(i).getID() == List.get(position).getFrom()){
+                return Assets.get(i);
+            }
+        }
+        return null;
+    }
+
     @Override
     public int getCount() {
         return List.size();

@@ -77,10 +77,11 @@
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="false"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_toEndOf="@+id/textView5"
@@ -146,9 +147,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="false"
-                android:layout_marginStart="35dp"
-                android:layout_marginLeft="35dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="7dp"
                 android:layout_marginBottom="7dp"
                 android:onClick="SetDate"
                 android:text="0000"
@@ -164,8 +165,8 @@
                 android:layout_marginTop="7dp"
                 android:layout_toEndOf="@+id/txt_year"
                 android:layout_toRightOf="@+id/txt_year"
-                android:text="年"
                 android:onClick="SetDate"
+                android:text="年"
                 android:textSize="26sp" />
 
             <TextView
@@ -173,13 +174,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="7dp"
                 android:layout_toEndOf="@+id/txt_month"
                 android:layout_toRightOf="@+id/txt_month"
-                android:text="月"
                 android:onClick="SetDate"
+                android:text="月"
                 android:textSize="26sp" />
 
             <TextView
@@ -187,13 +188,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
                 android:layout_marginTop="7dp"
                 android:layout_toEndOf="@+id/txt_day"
                 android:layout_toRightOf="@+id/txt_day"
-                android:text="日"
                 android:onClick="SetDate"
+                android:text="日"
                 android:textSize="26sp" />
 
             <TextView
@@ -202,14 +203,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="false"
-                android:layout_marginStart="3dp"
-                android:layout_marginLeft="3dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginLeft="7dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="5dp"
                 android:layout_toEndOf="@+id/textView23"
                 android:layout_toRightOf="@+id/textView23"
-                android:text="00"
                 android:onClick="SetTime"
+                android:text="00"
                 android:textSize="26sp" />
 
             <TextView
@@ -217,13 +218,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="3dp"
-                android:layout_marginLeft="3dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
                 android:layout_marginTop="7dp"
                 android:layout_toEndOf="@+id/textView21"
                 android:layout_toRightOf="@+id/textView21"
-                android:text="00"
                 android:onClick="SetDate"
+                android:text="00"
                 android:textSize="26sp" />
 
             <TextView
@@ -234,12 +235,12 @@
                 android:layout_alignParentBottom="false"
                 android:layout_marginStart="6dp"
                 android:layout_marginLeft="6dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="7dp"
                 android:layout_marginBottom="7dp"
                 android:layout_toEndOf="@+id/textView20"
                 android:layout_toRightOf="@+id/textView20"
-                android:text="00"
                 android:onClick="SetDate"
+                android:text="00"
                 android:textSize="26sp" />
 
             <TextView
@@ -252,8 +253,8 @@
                 android:layout_marginTop="7dp"
                 android:layout_toEndOf="@+id/txt_hour"
                 android:layout_toRightOf="@+id/txt_hour"
-                android:text=" : "
                 android:onClick="SetTime"
+                android:text=" : "
                 android:textSize="26sp" />
 
             <TextView
@@ -261,13 +262,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="7dp"
-                android:layout_marginLeft="7dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="6dp"
                 android:layout_toEndOf="@+id/textView24"
                 android:layout_toRightOf="@+id/textView24"
-                android:text="00"
                 android:onClick="SetTime"
+                android:text="00"
                 android:textSize="26sp" />
 
         </RelativeLayout>
