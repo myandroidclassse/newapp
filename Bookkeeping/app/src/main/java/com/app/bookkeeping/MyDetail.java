@@ -57,7 +57,7 @@ class MyDetail extends Activity {
 //    private List<Map<String, Object>> dataList;
 //    private SimpleAdapter adapter;
     int from;
-
+    BillEntify Bill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +77,7 @@ class MyDetail extends Activity {
         txt_day = findViewById(R.id.txt_day);
         txt_hour = findViewById(R.id.txt_hour);
         txt_minite = findViewById(R.id.txt_minite);
+        Bill = (BillEntify)getIntent().getSerializableExtra("Bill");
         getCurDate();
         setDialog();
         initData();
