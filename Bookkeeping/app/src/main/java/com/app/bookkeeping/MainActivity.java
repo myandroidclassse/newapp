@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             AllBillAdapt = new BillAdapt(MainActivity.this);
             ListOfAssets = dao.getAssets(MainActivity.this);
             ListOfAllBills = dao.getBills(MainActivity.this,0);
+            ListOfAssets.remove(0);
             AllBillAdapt.setList(ListOfAllBills);
             AllBillAdapt.setAssetList(ListOfAssets);
 
@@ -140,7 +141,9 @@ public class MainActivity extends AppCompatActivity {
                 AssetsEntify assetsEntify = billAdapt.getAsset(position);
                 Intent intent = new Intent(MainActivity.this,MyDetail.class);
                 intent.putExtra("Bill",billEntify);
-                intent.putExtra("Asset",assetsEntify);
+                if(billEntify.getFrom() != 0){
+                    intent.putExtra("Asset",assetsEntify);
+                }
                 startActivity(intent);
             }
         });

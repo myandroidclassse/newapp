@@ -3,7 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/grid_background"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:foregroundGravity="center"
+    android:gravity="center"
+    app:layout_anchorGravity="center">
 
     <ImageView
         android:id="@+id/img_aim"
