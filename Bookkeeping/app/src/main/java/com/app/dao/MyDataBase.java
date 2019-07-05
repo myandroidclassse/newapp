@@ -179,7 +179,7 @@ public class MyDataBase {
 //        values.put(billString[0],bill.getID());
         values.put(billString[1],bill.getFrom());
         values.put(billString[2],bill.getMoney());
-        values.put(billString[3],bill.getDate().toString());
+        values.put(billString[3],bill.getDateString());
         values.put(billString[4],bill.getAim());
         if(mSqliteDatabase.insert(TABLE_NAME_BILL,null,values) != -1){
             Cursor cursor = getBill_desc();
@@ -198,7 +198,7 @@ public class MyDataBase {
 //        values.put(aimString[0],aim.getID());
         values.put(aimString[1],aim.getType());
         values.put(aimString[2],aim.getMoney());
-        values.put(aimString[3],aim.getDate().toString());
+        values.put(aimString[3],aim.getDateString());
         if(mSqliteDatabase.insert(TABLE_NAME_AIM,null,values) != -1){
             Cursor cursor = getAim_desc();
             if(cursor.moveToFirst()){
@@ -254,7 +254,7 @@ public class MyDataBase {
         values.put(billString[0],billEntify.getID());
         values.put(billString[1],billEntify.getFrom());
         values.put(billString[2],billEntify.getMoney());
-        values.put(billString[3],billEntify.getDate().toString());
+        values.put(billString[3],billEntify.getDateString());
         values.put(billString[4],billEntify.getAim());
         sub = mSqliteDatabase.update(TABLE_NAME_BILL,values,selection,null);
         return sub;
@@ -268,7 +268,7 @@ public class MyDataBase {
         values.put(aimString[0],aimEntify.getID());
         values.put(aimString[1],aimEntify.getType());
         values.put(aimString[2],aimEntify.getMoney());
-        values.put(aimString[3],aimEntify.getDate().toString());
+        values.put(aimString[3],aimEntify.getDateString());
         sub = mSqliteDatabase.update(TABLE_NAME_BILL,values,selection,null);
         return sub;
     }
