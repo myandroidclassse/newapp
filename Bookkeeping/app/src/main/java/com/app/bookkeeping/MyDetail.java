@@ -329,21 +329,21 @@ public class MyDetail extends Activity {
         bill.setDateString(time);
 
         Dao dao = new Dao();
-//        if(dao.updataBill(MyDetail.this,bill,Bill.getMoney(),Bill.getFrom()) != -1){
-//            Toast.makeText(this,"更新成功",Toast.LENGTH_SHORT).show();
-//            finish();
-//        }
-//        else {
-//            Toast.makeText(this,"修改失败，请重试",Toast.LENGTH_SHORT).show();
-//        }
+        if(dao.updataBill(MyDetail.this,bill,Bill.getMoney(),Bill.getFrom()) != -1){
+            Toast.makeText(this,"更新成功",Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        else {
+            Toast.makeText(this,"修改失败，请重试",Toast.LENGTH_SHORT).show();
+        }
 
     }
 
     public void deleteBill(){
-        BillEntify bill = new BillEntify();
-        bill.setID(Bill.getID());
+//        BillEntify bill = new BillEntify();
+//        bill.setID(Bill.getID());
         Dao dao = new Dao();
-        dao.deleteBill(this,bill);
+        dao.deleteBill(this,Bill);
         finish();
     }
 
