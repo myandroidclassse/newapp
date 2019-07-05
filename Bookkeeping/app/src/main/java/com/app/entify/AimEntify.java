@@ -7,6 +7,15 @@ public class AimEntify {
     int type;
     String money;
     Date date;
+    String dateString;
+
+    public String getDateString() {
+        return dateString;
+    }
+
+    public void setDateString(String dateString) {
+        this.dateString = dateString;
+    }
 
     public int getID() {
         return ID;
