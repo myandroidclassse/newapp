@@ -39,7 +39,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
-class MyDetail extends Activity {
+public class MyDetail extends Activity {
 
     private static TextView txt_year,txt_month,txt_day,txt_hour,txt_minite;
 
@@ -77,7 +77,9 @@ class MyDetail extends Activity {
         txt_hour = findViewById(R.id.txt_hour);
         txt_minite = findViewById(R.id.txt_minite);
         Bill = (BillEntify)getIntent().getSerializableExtra("Bill");
-        Asset = (AssetsEntify)getIntent().getSerializableExtra("Asset");
+        if(Bill.getFrom() != 0){
+            Asset = (AssetsEntify)getIntent().getSerializableExtra("Asset");
+        }
         getCurDate();
         setDialog();
         initData();
@@ -183,28 +185,29 @@ class MyDetail extends Activity {
     void initData() {
         AimGridAdapt aimGridAdapt = new AimGridAdapt(MyDetail.this);
         aimGridAdapt.setList();
-
-        switch (Asset.getType()){
-            case 0:
-                img_bank.setImageResource(R.drawable.bank);
-                break;
-            case 1:
-                img_bank.setImageResource(R.drawable.alipay);
-                break;
-            case 2:
-                img_bank.setImageResource(R.drawable.jianshebank);
-                break;
-            case 3:
-                img_bank.setImageResource(R.drawable.chinabank);
-                break;
-            case 4:
-                img_bank.setImageResource(R.drawable.youzhengbank);
-                break;
-            case 5:
-                img_bank.setImageResource(R.drawable.gongshangbank);
-                break;
+        if(Bill.getFrom() != 0){
+            switch (Asset.getType()){
+                case 0:
+                    img_bank.setImageResource(R.drawable.bank);
+                    break;
+                case 1:
+                    img_bank.setImageResource(R.drawable.alipay);
+                    break;
+                case 2:
+                    img_bank.setImageResource(R.drawable.jianshebank);
+                    break;
+                case 3:
+                    img_bank.setImageResource(R.drawable.chinabank);
+                    break;
+                case 4:
+                    img_bank.setImageResource(R.drawable.youzhengbank);
+                    break;
+                case 5:
+                    img_bank.setImageResource(R.drawable.gongshangbank);
+                    break;
+            }
+            bank_name.setText(Asset.getName());
         }
-        bank_name.setText(Asset.getName());
         edit_money.setHint(Bill.getMoney());
         aimGridAdapt.setLastPosition(Bill.getAim()-1);
 
@@ -313,29 +316,26 @@ class MyDetail extends Activity {
     //点击确认按钮后修改账单(缺少数据捕获 by王家淇)
     public void updataBill(){
         BillEntify bill = new BillEntify();
-        int ID = 0;
-        String money = "";
-        int aim = 0;
-        int from = 0;
         Date date = new Date();
+        String time = txt_year.getText().toString() + "-" + txt_month.getText().toString() + "-" + txt_day.getText().toString() + " " + txt_hour.getText().toString() + ":" + txt_minite.getText().toString() + ":00";
 
 
 
 
-        bill.setID(ID);
-        bill.setMoney(money);
+        bill.setID(Bill.getID());
+        bill.setMoney(edit_money.getText().toString());
         bill.setAim(aim);
         bill.setFrom(from);
-        bill.setDate(date);
+        bill.setDateString(time);
 
         Dao dao = new Dao();
-        if(dao.updataBill(MyDetail.this,bill,Bill.getMoney()) != -1){
-            Toast.makeText(this,"更新成功",Toast.LENGTH_SHORT).show();
-            finish();
-        }
-        else {
-            Toast.makeText(this,"修改失败，请重试",Toast.LENGTH_SHORT).show();
-        }
+//        if(dao.updataBill(MyDetail.this,bill,Bill.getMoney(),Bill.getFrom()) != -1){
+//            Toast.makeText(this,"更新成功",Toast.LENGTH_SHORT).show();
+//            finish();
+//        }
+//        else {
+//            Toast.makeText(this,"修改失败，请重试",Toast.LENGTH_SHORT).show();
+//        }
 
     }
 
@@ -346,5 +346,7 @@ class MyDetail extends Activity {
         dao.deleteBill(this,bill);
         finish();
     }
+
+
 
 }

@@ -31,7 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
-class NewAsset extends AppCompatActivity {
+public class NewAsset extends AppCompatActivity {
     CardView choose_bank;
     private View inflate;
     private Dialog dialog;

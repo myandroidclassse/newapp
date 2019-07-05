@@ -77,11 +77,13 @@ public class BillAdapt extends BaseAdapter {
         TextView txt_aim = v.findViewById(R.id.txt_aim);
         TextView txt_money = v.findViewById(R.id.txt_money);
         TextView txt_card = v.findViewById(R.id.txt_card);
+        TextView txt_data = v.findViewById(R.id.txt_data);
         Properties Aimproperties = getProperty("AimString.properties");
 //        Properties Cardproperties = getProperty("CardString.properties");
         txt_aim.setText(Aimproperties.getProperty(String.valueOf(List.get(position).getAim())));
         txt_money.setText("¥  "+List.get(position).getMoney());
         txt_card.setText(findCard(List.get(position).getFrom()));
+        txt_data.setText(List.get(position).getDateString().substring(0,16));
         return v;
     }
 

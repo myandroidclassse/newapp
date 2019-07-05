@@ -30,14 +30,13 @@ import com.app.dao.Dao;
 import com.app.entify.AssetsEntify;
 import com.app.entify.BillEntify;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-class NewBill extends Activity {
+public class NewBill extends Activity {
 
     private static TextView txt_year,txt_month,txt_day,txt_hour,txt_minite;
 
@@ -300,9 +299,7 @@ class NewBill extends Activity {
         bill.setFrom(from);
         date.setTime(getStringToDate(time));
         bill.setDate(date);
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateString = format.format(date);
-        bill.setDateString(dateString);
+        bill.setDateString(time);
         Log.d("测试点",date.toString());
         Dao dao = new Dao();
         if(dao.addNewBill(NewBill.this,bill) != -1){
