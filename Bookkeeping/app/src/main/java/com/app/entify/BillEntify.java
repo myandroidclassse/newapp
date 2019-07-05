@@ -1,8 +1,9 @@
 package com.app.entify;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BillEntify {
+public class BillEntify implements Serializable {
     int ID;
     int from;
     String money;

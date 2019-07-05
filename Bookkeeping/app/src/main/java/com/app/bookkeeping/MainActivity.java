@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
@@ -24,7 +22,6 @@ import com.app.dao.Dao;
 import com.app.entify.AssetsEntify;
 import com.app.entify.BillEntify;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -108,7 +105,21 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AccountAdapt accountAdapt = (AccountAdapt)AssetList.getAdapter();
                 AssetsEntify assetsEntify = accountAdapt.getItem(position);
+                Intent intent = new Intent(MainActivity.this,AssetDetail.class);
+                intent.putExtra("Asset",assetsEntify);
+                startActivity(intent);
+            }
+        });
 
+
+        BillList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                BillAdapt billAdapt = (BillAdapt)BillList.getAdapter();
+                BillEntify billEntify = billAdapt.getItem(position);
+                Intent intent = new Intent(MainActivity.this,MyDetail.class);
+                intent.putExtra("Bill",billEntify);
+                startActivity(intent);
             }
         });
 
@@ -132,6 +143,18 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        init();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        init();
     }
 
 
