@@ -1,6 +1,8 @@
 package com.app.entify;
 
-public class AssetsEntify {
+import java.io.Serializable;
+
+public class AssetsEntify implements Serializable {
     int ID;
     String name;
     int type;

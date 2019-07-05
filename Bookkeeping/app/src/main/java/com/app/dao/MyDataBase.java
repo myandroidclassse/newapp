@@ -83,7 +83,7 @@ public class MyDataBase {
 
     //TODO 获取assets中某id项
     public Cursor getAssets(int id){
-        String sql = "select * from assets where id = " + id +";";
+        String sql = "select * from assets where _id = " + id +";";
         Cursor cursor = mSqliteDatabase.rawQuery(sql,null);
         return cursor;
     }

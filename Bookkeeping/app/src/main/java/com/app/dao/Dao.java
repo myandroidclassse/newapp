@@ -191,6 +191,8 @@ public class Dao {
                 Asset.setName(name);
                 cursor.close();
             }
+            Log.d("测试点money值",money);
+            Log.d("测试点bill.getMoney()值",bill.getMoney());
             double moneys = Double.valueOf(money) - Double.valueOf(bill.getMoney());
             String newmoney = moneys + "";
             Asset.setMoney(newmoney);
@@ -211,8 +213,10 @@ public class Dao {
                 Asset.setName(name);
                 cursor.close();
             }
+            Log.d("测试点money值2",money);
+            Log.d("测试点bill.getMoney()值2",bill.getMoney());
             double moneys = Double.valueOf(money) - Double.valueOf(bill.getMoney());
-            String newmoney = moneys + "";
+            String newmoney = String.valueOf(moneys);
             Asset.setMoney(newmoney);
             dataBase.updateAssets(Asset);
         }
