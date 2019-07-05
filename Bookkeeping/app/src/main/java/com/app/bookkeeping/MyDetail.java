@@ -185,7 +185,10 @@ public class MyDetail extends Activity {
     void initData() {
         AimGridAdapt aimGridAdapt = new AimGridAdapt(MyDetail.this);
         aimGridAdapt.setList();
+        from = Bill.getFrom();
+        aim = Bill.getAim();
         if(Bill.getFrom() != 0){
+            type = Asset.getType();
             switch (Asset.getType()){
                 case 0:
                     img_bank.setImageResource(R.drawable.bank);
@@ -208,7 +211,7 @@ public class MyDetail extends Activity {
             }
             bank_name.setText(Asset.getName());
         }
-        edit_money.setHint(Bill.getMoney());
+        edit_money.setText(Bill.getMoney());
         aimGridAdapt.setLastPosition(Bill.getAim()-1);
 
         gridView.setAdapter(aimGridAdapt);
@@ -238,6 +241,7 @@ public class MyDetail extends Activity {
                 Dao dao = new Dao();
                 List<AssetsEntify> List= dao.getAssets(MyDetail.this);
                 AccountAdapt accountAdapt = new AccountAdapt(MyDetail.this);
+                List.remove(0);
                 accountAdapt.setList(List);
                 final ListView list_of_bank = inflate.findViewById(R.id.choose_list);
                 list_of_bank.setAdapter(accountAdapt);

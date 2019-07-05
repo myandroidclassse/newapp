@@ -148,6 +148,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        AllBills.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                BillAdapt billAdapt = (BillAdapt)AllBills.getAdapter();
+                BillEntify billEntify = billAdapt.getItem(position);
+                AssetsEntify assetsEntify = billAdapt.getAsset(position);
+                Intent intent = new Intent(MainActivity.this,MyDetail.class);
+                intent.putExtra("Bill",billEntify);
+                if(billEntify.getFrom() != 0){
+                    intent.putExtra("Asset",assetsEntify);
+                }
+                startActivity(intent);
+            }
+        });
 
         btn_add_a_bill.setOnClickListener(new View.OnClickListener() {
             @Override

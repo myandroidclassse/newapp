@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.bookkeeping.R;
@@ -79,6 +80,8 @@ public class BillAdapt extends BaseAdapter {
         TextView txt_card = v.findViewById(R.id.txt_card);
         TextView txt_data = v.findViewById(R.id.txt_data);
         Properties Aimproperties = getProperty("AimString.properties");
+        ImageView img = v.findViewById(R.id.img_aim);
+        img.setImageResource(R.drawable.money);
 //        Properties Cardproperties = getProperty("CardString.properties");
         txt_aim.setText(Aimproperties.getProperty(String.valueOf(List.get(position).getAim())));
         txt_money.setText("¥  "+List.get(position).getMoney());
