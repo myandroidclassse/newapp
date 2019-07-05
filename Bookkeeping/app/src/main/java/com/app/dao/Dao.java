@@ -458,6 +458,7 @@ public class Dao {
     public void Creat(Context context){
         MyDataBase dataBase = new MyDataBase(context);
         Cursor cursor = null;
+        dataBase.open();
         cursor = dataBase.getAssets(0);
         AssetsEntify asset = new AssetsEntify();
         asset.setMoney("0");
@@ -467,6 +468,7 @@ public class Dao {
         if(cursor.equals(null)){
             dataBase.insertAssets_init(asset);
         }
+        dataBase.close();
     }
 
 

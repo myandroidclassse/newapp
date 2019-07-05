@@ -172,7 +172,8 @@ public class MainActivity extends AppCompatActivity {
         BillList = findViewById(R.id.BillList);
         init();
         setListen();
-        new Dao().Creat(MainActivity.this);
+        Dao dao = new Dao();
+        dao.Creat(MainActivity.this);
 
     }
 
