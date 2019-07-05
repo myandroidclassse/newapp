@@ -9,6 +9,15 @@ public class BillEntify implements Serializable {
     String money;
     Date date;
     int aim;
+    String dateString;
+
+    public String getDateString() {
+        return dateString;
+    }
+
+    public void setDateString(String dateString) {
+        this.dateString = dateString;
+    }
 
     public int getID() {
         return ID;

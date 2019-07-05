@@ -11,9 +11,11 @@ import com.app.entify.BillEntify;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.TimeZone;
 
 public class Dao {
     public List<AssetsEntify> getAssets(Context context){
@@ -74,6 +76,7 @@ public class Dao {
                     e.printStackTrace();
                 }
                 bill.setDate(date);
+                bill.setDateString(get[3]);
                 int aim = Integer.valueOf(get[4]);
                 bill.setAim(aim);
                 Bills.add(bill);
@@ -114,6 +117,7 @@ public class Dao {
                     e.printStackTrace();
                 }
                 bill.setDate(date);
+                bill.setDateString(get[3]);
                 int aim = Integer.valueOf(get[4]);
                 bill.setAim(aim);
                 Bills.add(bill);
@@ -135,7 +139,7 @@ public class Dao {
         String From = format.format(begin);
         String To = format.format(end);
 
-
+        cursor = dataBase.getAssets(From,To,type);
 
         if(cursor.moveToFirst()){
             while (true){
@@ -161,7 +165,7 @@ public class Dao {
         String From = format.format(begin);
         String To = format.format(end);
 
-
+        cursor = dataBase.getAssets(From,To);
 
         if(cursor.moveToFirst()){
             while (true){
@@ -469,5 +473,64 @@ public class Dao {
         dataBase.close();
     }
 
+    public double monthPay(Context context){
+        double money = 0;
+        MyDataBase dataBase = new MyDataBase(context);
+        dataBase.open();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        String year = String.valueOf(calendar.get(Calendar.YEAR));
+        String month = String.valueOf(calendar.get(Calendar.MONTH))+1;
+        ///"yyyy-MM-dd HH:mm:ss"
+
+        String begin = year+"-"+month+"-"+"01 "+"00:00:01";
+        String end = year+"-"+month+"-"+"30 "+"23:59:59";
+
+        Cursor cursor = dataBase.getAssets(begin,end);
+
+        if(cursor.moveToFirst()){
+            while (true){
+                String one = cursor.getString(2);
+                money += Double.valueOf(one);
+
+                if(cursor.moveToNext()) continue;
+                else break;
+            }
+            cursor.close();
+        }
+
+
+        dataBase.close();
+        return money;
+    }
+    public double monthPay(Context context,int year,int month){
+        double money = 0;
+        MyDataBase dataBase = new MyDataBase(context);
+        dataBase.open();
+        ///"yyyy-MM-dd HH:mm:ss"
+        String monthString = month + "";
+        if(month < 10){
+            monthString = "0"+monthString;
+        }
+        String begin = year+"-"+monthString+"-"+"01 "+"00:00:01";
+        String end = year+"-"+monthString+"-"+"30 "+"23:59:59";
+
+        Cursor cursor = dataBase.getAssets(begin,end);
+
+        if(cursor.moveToFirst()){
+            while (true){
+                String one = cursor.getString(2);
+                money += Double.valueOf(one);
+
+                if(cursor.moveToNext()) continue;
+                else break;
+            }
+            cursor.close();
+        }
+
+
+        dataBase.close();
+        return money;
+    }
 
 }
