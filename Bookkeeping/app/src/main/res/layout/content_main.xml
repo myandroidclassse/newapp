@@ -38,7 +38,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/txt_month_money"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
@@ -58,7 +58,7 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="20dp"
-                    android:text="总支出:"
+                    android:text="本月总支出:"
                     android:textColor="#E7E5E5"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +91,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/txt_all_money"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
