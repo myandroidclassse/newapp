@@ -35,15 +35,16 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     FloatingActionButton btn_add_a_bill;
     View main_activuty,list_activity,specail_activity;
-    TextView add_card;
+    TextView add_card,txt_all_money,txt_month_money;
     ListView AssetList,BillList,AllBills;
     AccountAdapt accountAdapt;
     BillAdapt billAdapt,AllBillAdapt;
     AssetsEntify allOftheAsset;
     private void init(){
 
+        Dao dao = new Dao();
         if(the_activity == MIAN_ACTIVITY){
-            Dao dao = new Dao();
+
             List<AssetsEntify> ListOfAssets;
             List<BillEntify> ListOfBills;
 
@@ -69,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
             setListViewHeightBasedOnChildren(AssetList);
             setListViewHeightBasedOnChildren(BillList);
         }else if(the_activity == LIST_ACTIVITY){
-            Dao dao = new Dao();
             List<AssetsEntify> ListOfAssets;
             List<BillEntify> ListOfAllBills;
             AllBillAdapt = new BillAdapt(MainActivity.this);
@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
             AllBills.setAdapter(AllBillAdapt);
         }
-
+        txt_all_money.setText("¥"+allOftheAsset.getMoney());
+        txt_month_money.setText("¥"+dao.monthPay(MainActivity.this));
     }
 
 
@@ -210,6 +211,8 @@ public class MainActivity extends AppCompatActivity {
         AssetList = findViewById(R.id.AssetList);
         BillList = findViewById(R.id.BillList);
         AllBills = findViewById(R.id.Billlist_of_all);
+        txt_month_money = findViewById(R.id.txt_month_money);
+        txt_all_money = findViewById(R.id.txt_all_money);
         init();
         setListen();
         Dao dao = new Dao();

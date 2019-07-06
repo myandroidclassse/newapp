@@ -8,7 +8,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.app.Adapt.AccountAdapt;
 import com.app.Adapt.BillAdapt;
 import com.app.dao.Dao;
 import com.app.entify.AssetsEntify;
