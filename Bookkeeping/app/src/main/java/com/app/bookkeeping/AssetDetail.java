@@ -169,12 +169,9 @@ public class AssetDetail extends Activity {
 
 
     public void deleteAsset(View view){
-        AssetsEntify newEntity = new AssetsEntify();
         Dao dao = new Dao();
 
-
-
-        if(dao.deleteAsset(AssetDetail.this,newEntity) == 1){
+        if(dao.deleteAsset(AssetDetail.this,assetsEntify) == 1){
             finish();
         }else{
             Snackbar.make(view, "更新失败，请重试", Snackbar.LENGTH_LONG)

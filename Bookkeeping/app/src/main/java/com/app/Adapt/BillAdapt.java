@@ -41,7 +41,6 @@ public class BillAdapt extends BaseAdapter {
             Empty = false;
             Comparator<BillEntify> comparator = new Comparator<BillEntify>() {
                 public int compare(BillEntify b1, BillEntify b2) {
-                    // 先排年龄
                     return b2.getDate().compareTo(b1.getDate());
                 }
             };
