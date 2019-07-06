@@ -387,7 +387,7 @@ public class Dao {
                 Asset.setName(name);
                 cursor.close();
             }
-            double moneys = Double.valueOf(money) + Double.valueOf(asset.getMoney());
+            double moneys = Double.valueOf(money) - Double.valueOf(asset.getMoney());
             String newmoney = moneys + "";
             Asset.setMoney(newmoney);
             dataBase.updateAssets(Asset);

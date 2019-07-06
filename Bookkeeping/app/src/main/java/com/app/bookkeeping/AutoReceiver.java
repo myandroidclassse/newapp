@@ -32,7 +32,7 @@ public class AutoReceiver extends BroadcastReceiver {
             manager.createNotificationChannel(channel);
             Log.w("AutoReceiver:","got it");
             Notification notify = new Notification.Builder(context,id)
-                    .setSmallIcon(R.drawable.bank)
+                    .setSmallIcon(R.mipmap.bookkeeepinganykpi)
                     .setTicker("TickerText:" + "记账规划生活:")
                     .setContentTitle("进行每日的记账总结吧～")
                     .setContentText("规划使生活更美好！")

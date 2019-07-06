@@ -43,7 +43,6 @@ public class AccountAdapt extends BaseAdapter {
             Empty = false;
             Comparator<AssetsEntify> comparator = new Comparator<AssetsEntify>() {
                 public int compare(AssetsEntify a1, AssetsEntify a2) {
-                    // 先排年龄
                     return (int)(Double.valueOf(a1.getMoney()) - Double.valueOf(a2.getMoney()));
                 }
             };
