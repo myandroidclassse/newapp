@@ -17,10 +17,18 @@ import java.util.List;
 public class ChooseList extends BaseAdapter {
     List<String> List = new LinkedList<>();
     Activity activity;
-
+    public boolean Empty = false;
 
     public void setList( List<String> List){
         this.List = List;
+        if(this.List.size() == 0){
+            Log.d("测试点","现在列表是空的");
+            Empty = true;
+            String s = "空的";
+            List.add(s);
+        }else{
+            Empty = false;
+        }
         this.notifyDataSetChanged();//动态更新视图
     }
 
@@ -45,6 +53,13 @@ public class ChooseList extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        if(Empty){
+            View view = View.inflate(activity,R.layout.emptylist,null);
+            ImageView imageView = view.findViewById(R.id.img_empty);
+            imageView.setImageResource(R.drawable.empty);
+            Log.d("测试点","我把那个空的放进去了啊");
+            return view;
+        }
         View adapt = View.inflate(activity,R.layout.choose_list_adapt,null);
         TextView name = adapt.findViewById(R.id.txt_list_bank_name);
         ImageView imageView = adapt.findViewById(R.id.img_list);

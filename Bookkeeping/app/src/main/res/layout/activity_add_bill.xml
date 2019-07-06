@@ -305,6 +305,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="#E91E63"
+        android:radius="5dp"
         android:text="保存"
         android:textColor="@android:color/background_light"
         android:textSize="20sp" />

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.Gravity;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.Adapt.BillAdapt;
 import com.app.Adapt.ChooseList;
@@ -77,6 +79,7 @@ public class AssetDetail extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 BillAdapt billAdapt = (BillAdapt)List.getAdapter();
+                if (billAdapt.Empty) return;
                 BillEntify billEntify = billAdapt.getItem(position);
                 AssetsEntify assetsEntify = billAdapt.getAsset(position);
                 Intent intent = new Intent(AssetDetail.this,MyDetail.class);
@@ -133,9 +136,50 @@ public class AssetDetail extends Activity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                updataAsset(v);
+            }
+        });
+
+        qiut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteAsset(v);
             }
         });
     }
 
+    public void updataAsset(View view){
+        AssetsEntify newEntity = new AssetsEntify();
+        Dao dao = new Dao();
+
+        newEntity.setID(assetsEntify.getID());
+        newEntity.setName(editname.getText().toString());
+        newEntity.setType(assetsEntify.getType());
+        newEntity.setMoney(editmoney.getText().toString());
+
+        if(dao.updataAsset(AssetDetail.this,newEntity,assetsEntify.getMoney()) == 1){
+            Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
+            finish();
+        }else{
+            Snackbar.make(view, "更新失败，请重试", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
+
+    }
+
+
+    public void deleteAsset(View view){
+        AssetsEntify newEntity = new AssetsEntify();
+        Dao dao = new Dao();
+
+
+
+        if(dao.deleteAsset(AssetDetail.this,newEntity) == 1){
+            finish();
+        }else{
+            Snackbar.make(view, "更新失败，请重试", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
+
+    }
 }

@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.Gravity;
@@ -83,7 +84,7 @@ public class NewBill extends Activity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addBill();
+                addBill(v);
             }
         });
 
@@ -138,8 +139,16 @@ public class NewBill extends Activity {
 //                Log.d("时间测试",String.valueOf(monthOfYear+1));
 //                Log.d("时间测试",String.valueOf(dayOfMonth));
                 txt_year.setText(String.valueOf(year));
-                txt_month.setText(String.valueOf(monthOfYear+1));
-                txt_day.setText(String.valueOf(dayOfMonth));
+                if((monthOfYear+1) < 10){
+                    txt_month.setText("0"+(monthOfYear+1));
+                }else {
+                    txt_month.setText(String.valueOf(monthOfYear+1));
+                }
+                if(dayOfMonth < 10){
+                    txt_day.setText("0"+dayOfMonth);
+                }else {
+                    txt_day.setText(String.valueOf(dayOfMonth));
+                }
             }
         }
                 // 设置初始日期
@@ -160,9 +169,9 @@ public class NewBill extends Activity {
 //                        Log.d("时间测试",String.valueOf(hourOfDay));
 //                        Log.d("时间测试",String.valueOf(minute));
                         if(hourOfDay < 10){
-                            txt_minite.setText("0"+hourOfDay);
+                            txt_hour.setText("0"+hourOfDay);
                         }else {
-                            txt_minite.setText(String.valueOf(hourOfDay));
+                            txt_hour.setText(String.valueOf(hourOfDay));
                         }
                         if(minute < 10){
                             txt_minite.setText("0"+minute);
@@ -289,7 +298,7 @@ public class NewBill extends Activity {
     }
 
     //点击确认按钮后添加账单(缺少数据捕获 by王家淇)
-    public void addBill(){
+    public void addBill(View view){
         BillEntify bill = new BillEntify();
         Date date = new Date();
         String time = txt_year.getText().toString() + "-" + txt_month.getText().toString() + "-" + txt_day.getText().toString() + " " + txt_hour.getText().toString() + ":" + txt_minite.getText().toString() + ":00";
@@ -304,14 +313,15 @@ public class NewBill extends Activity {
         date.setTime(getStringToDate(time));
         bill.setDate(date);
         bill.setDateString(time);
-        Log.d("测试点",date.toString());
         Dao dao = new Dao();
         if(dao.addNewBill(NewBill.this,bill) != -1){
             Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
             finish();
         }
         else{
-            Toast.makeText(this,"添加失败，请重试",Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this,"添加失败，请重试",Toast.LENGTH_SHORT).show();
+            Snackbar.make(view, "添加失败，请重试", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
 
     }

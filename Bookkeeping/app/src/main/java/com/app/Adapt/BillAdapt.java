@@ -1,6 +1,7 @@
 package com.app.Adapt;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,6 +15,8 @@ import com.app.entify.BillEntify;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -22,13 +25,28 @@ public class BillAdapt extends BaseAdapter {
     List<BillEntify> List = new LinkedList<>();
     List<AssetsEntify> Assets = new LinkedList<>();
     Activity activity;
-
+    public boolean Empty = false;
     public BillAdapt(Activity activity){
         this.activity = activity;
     }
 
     public void setList(List<BillEntify> List){
         this.List = List;
+        if(this.List.size() == 0){
+            Log.d("测试点","现在列表是空的");
+            Empty = true;
+            BillEntify billEntify = new BillEntify();
+            List.add(billEntify);
+        }else{
+            Empty = false;
+            Comparator<BillEntify> comparator = new Comparator<BillEntify>() {
+                public int compare(BillEntify b1, BillEntify b2) {
+                    // 先排年龄
+                    return b2.getDate().compareTo(b1.getDate());
+                }
+            };
+            Collections.sort(List,comparator);
+        }
         this.notifyDataSetChanged();//动态更新视图
     }
 
@@ -74,6 +92,13 @@ public class BillAdapt extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        if(Empty){
+            View view = View.inflate(activity,R.layout.emptylist,null);
+            Log.d("测试点","我把那个空的放进去了啊");
+            ImageView imageView = view.findViewById(R.id.img_empty);
+            imageView.setImageResource(R.drawable.empty);
+            return view;
+        }
         View v = View.inflate(activity, R.layout.bill_list,null);
         TextView txt_aim = v.findViewById(R.id.txt_aim);
         TextView txt_money = v.findViewById(R.id.txt_money);
