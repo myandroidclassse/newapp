@@ -1,13 +1,23 @@
 package com.app.entify;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BillEntify {
+public class BillEntify implements Serializable {
     int ID;
     int from;
-    int money;
+    String money;
     Date date;
     int aim;
+    String dateString;
+
+    public String getDateString() {
+        return dateString;
+    }
+
+    public void setDateString(String dateString) {
+        this.dateString = dateString;
+    }
 
     public int getID() {
         return ID;
@@ -25,11 +35,11 @@ public class BillEntify {
         this.from = from;
     }
 
-    public int getMoney() {
+    public String getMoney() {
         return money;
     }
 
-    public void setMoney(int money) {
+    public void setMoney(String money) {
         this.money = money;
     }
 

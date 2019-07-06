@@ -4,9 +4,18 @@ import java.util.Date;
 
 public class AimEntify {
     int ID;
-    String aim;
-    int money;
+    int type;
+    String money;
     Date date;
+    String dateString;
+
+    public String getDateString() {
+        return dateString;
+    }
+
+    public void setDateString(String dateString) {
+        this.dateString = dateString;
+    }
 
     public int getID() {
         return ID;
@@ -16,19 +25,19 @@ public class AimEntify {
         this.ID = ID;
     }
 
-    public String getAim() {
-        return aim;
+    public int getType() {
+        return type;
     }
 
-    public void setAim(String aim) {
-        this.aim = aim;
+    public void setType(int type) {
+        this.type = type;
     }
 
-    public int getMoney() {
+    public String getMoney() {
         return money;
     }
 
-    public void setMoney(int money) {
+    public void setMoney(String money) {
         this.money = money;
     }
 

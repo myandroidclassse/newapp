@@ -1,10 +1,12 @@
 package com.app.entify;
 
-public class AssetsEntify {
+import java.io.Serializable;
+
+public class AssetsEntify implements Serializable {
     int ID;
     String name;
     int type;
-    int money;
+    String money;
 
     public int getID() {
         return ID;
@@ -30,11 +32,11 @@ public class AssetsEntify {
         this.type = type;
     }
 
-    public int getMoney() {
+    public String getMoney() {
         return money;
     }
 
-    public void setMoney(int money) {
+    public void setMoney(String money) {
         this.money = money;
     }
 }
