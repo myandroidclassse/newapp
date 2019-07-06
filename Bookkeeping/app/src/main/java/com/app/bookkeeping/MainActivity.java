@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     BillAdapt billAdapt,AllBillAdapt;
     AssetsEntify allOftheAsset;
     GridView gridView;
-    int aim = 1;
+    int aim = 0;
     private void init(){
 
         Dao dao = new Dao();
@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
             AllBillAdapt.setAssetList(ListOfAssets);
             AllBills.setAdapter(AllBillAdapt);
         }else  if (the_activity == SPECAIL_ACTIVITY){
+            aim = 0;
             getCurDateFrom();
             getCurDateTo();
             AimGridAdapt aimGridAdapt = new AimGridAdapt(MainActivity.this);
@@ -305,6 +306,7 @@ public class MainActivity extends AppCompatActivity {
     public void OnClickAdd(){
         Intent intent = new Intent(MainActivity.this,NewBill.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.anim_1,R.anim.anim_2);
     }
 
     public void OnClickList(){
@@ -315,7 +317,6 @@ public class MainActivity extends AppCompatActivity {
     public void OnClickNewAsset(){
         Intent intent = new Intent(MainActivity.this,NewAsset.class);
         startActivity(intent);
-
     }
 
     public void OnClickAssetDetial(){

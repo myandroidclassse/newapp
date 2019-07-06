@@ -92,7 +92,6 @@ public class NewBill extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-
             }
         });
     }

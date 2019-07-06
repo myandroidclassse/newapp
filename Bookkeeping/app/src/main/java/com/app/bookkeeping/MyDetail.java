@@ -95,7 +95,6 @@ public class MyDetail extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
-
             }
         });
 

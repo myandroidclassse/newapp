@@ -8,6 +8,8 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
@@ -19,6 +21,7 @@ public class AutoReceiver extends BroadcastReceiver {
     @SuppressLint("NewApi")
     @Override
     public void onReceive(Context context, Intent intent) {
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.money);
         if (intent.getAction().equals("VIDEO_TIMER")) {
             String id="channel_1";
             int importance = NotificationManager.IMPORTANCE_LOW;
@@ -31,11 +34,13 @@ public class AutoReceiver extends BroadcastReceiver {
                     .getSystemService(NOTIFICATION_SERVICE);
             manager.createNotificationChannel(channel);
             Log.w("AutoReceiver:","got it");
+
             Notification notify = new Notification.Builder(context,id)
                     .setSmallIcon(R.mipmap.bookkeeepinganykpi)
                     .setTicker("TickerText:" + "记账规划生活:")
                     .setContentTitle("进行每日的记账总结吧～")
                     .setContentText("规划使生活更美好！")
+                    .setLargeIcon(bitmap)
                     .setContentIntent(pendingIntent).setNumber(1).build(); // 需要注意build()是在API
             // level16及之后增加的，API11可以使用getNotificatin()来替代
             notify.flags |= Notification.FLAG_AUTO_CANCEL; // FLAG_AUTO_CANCEL表明当通知被用户点击时，通知将被清除。
