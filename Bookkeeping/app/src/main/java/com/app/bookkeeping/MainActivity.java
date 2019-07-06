@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
+import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.app.Adapt.AccountAdapt;
+import com.app.Adapt.AimGridAdapt;
 import com.app.Adapt.BillAdapt;
 import com.app.dao.Dao;
 import com.app.entify.AssetsEntify;
@@ -47,11 +49,13 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     FloatingActionButton btn_add_a_bill;
     View main_activuty,list_activity,specail_activity;
-    TextView add_card,txt_all_money,txt_month_money;
+    TextView add_card,txt_all_money,txt_month_money,txt_special_money;
     ListView AssetList,BillList,AllBills;
     AccountAdapt accountAdapt;
     BillAdapt billAdapt,AllBillAdapt;
     AssetsEntify allOftheAsset;
+    GridView gridView;
+    int aim = 1;
     private void init(){
 
         Dao dao = new Dao();
@@ -96,6 +100,9 @@ public class MainActivity extends AppCompatActivity {
         }else  if (the_activity == SPECAIL_ACTIVITY){
             getCurDateFrom();
             getCurDateTo();
+            AimGridAdapt aimGridAdapt = new AimGridAdapt(MainActivity.this);
+            aimGridAdapt.setList();
+            gridView.setAdapter(aimGridAdapt);
 
         }
         txt_all_money.setText("¥"+allOftheAsset.getMoney());
@@ -202,7 +209,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AimGridAdapt adapt = (AimGridAdapt) gridView.getAdapter();
+                adapt.setLastPosition(position);
 
+                aim = position + 1;
+            }
+        });
 
     }
 
@@ -246,6 +262,9 @@ public class MainActivity extends AppCompatActivity {
         to_year = findViewById(R.id.to_year);
         to_minite = findViewById(R.id.to_minite);
         to_hour = findViewById(R.id.to_hour);
+        gridView = findViewById(R.id.special_aim_list);
+        txt_special_money = findViewById(R.id.txt_special_money);
+
         init();
         setListen();
         Intent intent = new Intent(this, AutoReceiver.class);
@@ -389,8 +408,9 @@ public class MainActivity extends AppCompatActivity {
 //                Log.d("时间测试",String.valueOf(monthOfYear+1));
 //                Log.d("时间测试",String.valueOf(dayOfMonth));
                 from_year.setText(String.valueOf(year));
-                from_month.setText(String.valueOf(monthOfYear+1));
-                from_day.setText(String.valueOf(dayOfMonth));
+                from_month.setText(buling(String.valueOf(monthOfYear+1)));
+                from_day.setText(buling(String.valueOf(dayOfMonth)));
+
             }
         }
                 // 设置初始日期
@@ -411,9 +431,9 @@ public class MainActivity extends AppCompatActivity {
 //                        Log.d("时间测试",String.valueOf(hourOfDay));
 //                        Log.d("时间测试",String.valueOf(minute));
                         if(hourOfDay < 10){
-                            from_minite.setText("0"+hourOfDay);
+                            from_hour.setText("0"+hourOfDay);
                         }else {
-                            from_minite.setText(String.valueOf(hourOfDay));
+                            from_hour.setText(String.valueOf(hourOfDay));
                         }
                         if(minute < 10){
                             from_minite.setText("0"+minute);
@@ -451,8 +471,8 @@ public class MainActivity extends AppCompatActivity {
 //                Log.d("时间测试",String.valueOf(monthOfYear+1));
 //                Log.d("时间测试",String.valueOf(dayOfMonth));
                 to_year.setText(String.valueOf(year));
-                to_month.setText(String.valueOf(monthOfYear+1));
-                to_day.setText(String.valueOf(dayOfMonth));
+                to_month.setText(buling(String.valueOf(monthOfYear+1)));
+                to_day.setText(buling(String.valueOf(dayOfMonth)));
             }
         }
                 // 设置初始日期
@@ -474,9 +494,9 @@ public class MainActivity extends AppCompatActivity {
 //                        Log.d("时间测试",String.valueOf(hourOfDay));
 //                        Log.d("时间测试",String.valueOf(minute));
                         if(hourOfDay < 10){
-                            to_minite.setText("0"+hourOfDay);
+                            to_hour.setText("0"+hourOfDay);
                         }else {
-                            to_minite.setText(String.valueOf(hourOfDay));
+                            to_hour.setText(String.valueOf(hourOfDay));
                         }
                         if(minute < 10){
                             to_minite.setText("0"+minute);
@@ -495,7 +515,6 @@ public class MainActivity extends AppCompatActivity {
     public void Select(View view){
         String from = from_year.getText().toString() + "-" + buling(from_month.getText().toString()) + "-" + buling(from_day.getText().toString()) + " " + buling(from_hour.getText().toString()) + ":" + buling(from_minite.getText().toString()) + ":00";
         String to = to_year.getText().toString() + "-" + buling(to_month.getText().toString()) + "-" + buling(to_day.getText().toString()) + " " + buling(to_hour.getText().toString()) + ":" + buling(to_minite.getText().toString()) + ":00";
-        int aim = 0;
         double ans = 0;
         Dao dao = new Dao();
         if (aim != 0){
@@ -503,11 +522,11 @@ public class MainActivity extends AppCompatActivity {
         }else{
             ans = dao.getMoneyFromDate(MainActivity.this,from,to);
         }
-        Toast.makeText(this,"ans="+ans,Toast.LENGTH_LONG).show();
-
+//        Toast.makeText(this,"ans="+ans,Toast.LENGTH_LONG).show();
+        txt_special_money.setText("此期间使用了"+ans+"元");
 
     }
-    public String buling(String number){
+    public static String buling(String number){
         if(number.length()<2) return "0"+number;
         else return number;
     }

@@ -3,323 +3,348 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="120dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/txt_special_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal"
+            android:textColor="@android:color/background_dark"
+            android:textSize="24sp" />
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="FROM"
+        android:textSize="18sp" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="67dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/from_year"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentBottom="false"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginBottom="7dp"
-                        android:onClick="SetDateFrom"
-                        android:text="0000"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/textView020"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="7dp"
-                        android:layout_marginLeft="7dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toEndOf="@+id/from_year"
-                        android:layout_toRightOf="@+id/from_year"
-                        android:onClick="SetDateFrom"
-                        android:text="年"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/textView021"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toEndOf="@+id/from_month"
-                        android:layout_toRightOf="@+id/from_month"
-                        android:onClick="SetDateFrom"
-                        android:text="月"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/textView023"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toEndOf="@+id/from_day"
-                        android:layout_toRightOf="@+id/from_day"
-                        android:onClick="SetDateFrom"
-                        android:text="日"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/from_hour"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentBottom="false"
-                        android:layout_marginStart="7dp"
-                        android:layout_marginLeft="7dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_toEndOf="@+id/textView023"
-                        android:layout_toRightOf="@+id/textView023"
-                        android:onClick="SetTimeFrom"
-                        android:text="00"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/from_day"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toEndOf="@+id/textView021"
-                        android:layout_toRightOf="@+id/textView021"
-                        android:onClick="SetDateFrom"
-                        android:text="00"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/from_month"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentBottom="false"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginBottom="7dp"
-                        android:layout_toEndOf="@+id/textView020"
-                        android:layout_toRightOf="@+id/textView020"
-                        android:onClick="SetDateFrom"
-                        android:text="00"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/textView024"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toEndOf="@+id/from_hour"
-                        android:layout_toRightOf="@+id/from_hour"
-                        android:onClick="SetTimeFrom"
-                        android:text=" : "
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/from_minite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="6dp"
-                        android:layout_toEndOf="@+id/textView024"
-                        android:layout_toRightOf="@+id/textView024"
-                        android:onClick="SetTimeFrom"
-                        android:text="00"
-                        android:textSize="26sp" />
-
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="67dp"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/to_year"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentBottom="false"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginBottom="7dp"
-                        android:onClick="SetDateTo"
-                        android:text="0000"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/textView120"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="7dp"
-                        android:layout_marginLeft="7dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toEndOf="@+id/to_year"
-                        android:layout_toRightOf="@+id/to_year"
-                        android:onClick="SetDateTo"
-                        android:text="年"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/textView121"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toEndOf="@+id/to_month"
-                        android:layout_toRightOf="@+id/to_month"
-                        android:onClick="SetDateTo"
-                        android:text="月"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/textView123"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toEndOf="@+id/to_day"
-                        android:layout_toRightOf="@+id/to_day"
-                        android:onClick="SetDateTo"
-                        android:text="日"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/to_hour"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentBottom="false"
-                        android:layout_marginStart="7dp"
-                        android:layout_marginLeft="7dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_toEndOf="@+id/textView123"
-                        android:layout_toRightOf="@+id/textView123"
-                        android:onClick="SetTimeTo"
-                        android:text="00"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/to_day"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toEndOf="@+id/textView121"
-                        android:layout_toRightOf="@+id/textView121"
-                        android:onClick="SetDateTo"
-                        android:text="00"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/to_month"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentBottom="false"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginBottom="7dp"
-                        android:layout_toEndOf="@+id/textView120"
-                        android:layout_toRightOf="@+id/textView120"
-                        android:onClick="SetDateTo"
-                        android:text="00"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/textView124"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_toEndOf="@+id/to_hour"
-                        android:layout_toRightOf="@+id/to_hour"
-                        android:onClick="SetTimeTo"
-                        android:text=" : "
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:id="@+id/to_minite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="6dp"
-                        android:layout_toEndOf="@+id/textView124"
-                        android:layout_toRightOf="@+id/textView124"
-                        android:onClick="SetTimeTo"
-                        android:text="00"
-                        android:textSize="26sp" />
-
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="67dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button"
+            <TextView
+                android:id="@+id/from_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="查询"
-                android:onClick="Select"/>
-        </LinearLayout>
-    </LinearLayout>
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="false"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:onClick="SetDateFrom"
+                android:text="0000"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/textView020"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@+id/from_year"
+                android:layout_toRightOf="@+id/from_year"
+                android:onClick="SetDateFrom"
+                android:text="年"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/textView021"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@+id/from_month"
+                android:layout_toRightOf="@+id/from_month"
+                android:onClick="SetDateFrom"
+                android:text="月"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/textView023"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@+id/from_day"
+                android:layout_toRightOf="@+id/from_day"
+                android:onClick="SetDateFrom"
+                android:text="日"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/from_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="false"
+                android:layout_marginStart="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@+id/textView023"
+                android:layout_toRightOf="@+id/textView023"
+                android:onClick="SetTimeFrom"
+                android:text="00"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/from_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@+id/textView021"
+                android:layout_toRightOf="@+id/textView021"
+                android:onClick="SetDateFrom"
+                android:text="00"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/from_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="false"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:layout_toEndOf="@+id/textView020"
+                android:layout_toRightOf="@+id/textView020"
+                android:onClick="SetDateFrom"
+                android:text="00"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/textView024"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@+id/from_hour"
+                android:layout_toRightOf="@+id/from_hour"
+                android:onClick="SetTimeFrom"
+                android:text=" : "
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/from_minite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@+id/textView024"
+                android:layout_toRightOf="@+id/textView024"
+                android:onClick="SetTimeFrom"
+                android:text="00"
+                android:textSize="26sp" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="TO"
+        android:textSize="18sp" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/to_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="false"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:onClick="SetDateTo"
+                android:text="0000"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/textView120"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@+id/to_year"
+                android:layout_toRightOf="@+id/to_year"
+                android:onClick="SetDateTo"
+                android:text="年"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/textView121"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@+id/to_month"
+                android:layout_toRightOf="@+id/to_month"
+                android:onClick="SetDateTo"
+                android:text="月"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/textView123"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@+id/to_day"
+                android:layout_toRightOf="@+id/to_day"
+                android:onClick="SetDateTo"
+                android:text="日"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/to_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="false"
+                android:layout_marginStart="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@+id/textView123"
+                android:layout_toRightOf="@+id/textView123"
+                android:onClick="SetTimeTo"
+                android:text="00"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/to_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@+id/textView121"
+                android:layout_toRightOf="@+id/textView121"
+                android:onClick="SetDateTo"
+                android:text="00"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/to_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="false"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:layout_toEndOf="@+id/textView120"
+                android:layout_toRightOf="@+id/textView120"
+                android:onClick="SetDateTo"
+                android:text="00"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/textView124"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@+id/to_hour"
+                android:layout_toRightOf="@+id/to_hour"
+                android:onClick="SetTimeTo"
+                android:text=" : "
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/to_minite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@+id/textView124"
+                android:layout_toRightOf="@+id/textView124"
+                android:onClick="SetTimeTo"
+                android:text="00"
+                android:textSize="26sp" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <GridView
+        android:id="@+id/special_aim_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth">
+
+    </GridView>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/biankuang"
+        android:onClick="Select"
+        android:text="查询" />
+
 </LinearLayout>

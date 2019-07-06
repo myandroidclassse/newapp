@@ -15,6 +15,8 @@ import com.app.entify.BillEntify;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -37,6 +39,13 @@ public class BillAdapt extends BaseAdapter {
             List.add(billEntify);
         }else{
             Empty = false;
+            Comparator<BillEntify> comparator = new Comparator<BillEntify>() {
+                public int compare(BillEntify b1, BillEntify b2) {
+                    // 先排年龄
+                    return b2.getDate().compareTo(b1.getDate());
+                }
+            };
+            Collections.sort(List,comparator);
         }
         this.notifyDataSetChanged();//动态更新视图
     }

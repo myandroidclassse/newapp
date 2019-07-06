@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.app.bookkeeping.R;
 import com.app.entify.AssetsEntify;
+import com.app.entify.BillEntify;
 
 import org.w3c.dom.Text;
 
@@ -17,6 +18,8 @@ import org.w3c.dom.Text;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -38,6 +41,13 @@ public class AccountAdapt extends BaseAdapter {
             List.add(assetsEntify);
         }else{
             Empty = false;
+            Comparator<AssetsEntify> comparator = new Comparator<AssetsEntify>() {
+                public int compare(AssetsEntify a1, AssetsEntify a2) {
+                    // 先排年龄
+                    return (int)(Double.valueOf(a1.getMoney()) - Double.valueOf(a2.getMoney()));
+                }
+            };
+            Collections.sort(List,comparator);
         }
         this.notifyDataSetChanged();//动态更新视图
     }

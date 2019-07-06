@@ -139,8 +139,8 @@ public class NewBill extends Activity {
 //                Log.d("时间测试",String.valueOf(monthOfYear+1));
 //                Log.d("时间测试",String.valueOf(dayOfMonth));
                 txt_year.setText(String.valueOf(year));
-                if(monthOfYear+1 < 10){
-                    txt_month.setText("0"+monthOfYear+1);
+                if((monthOfYear+1) < 10){
+                    txt_month.setText("0"+(monthOfYear+1));
                 }else {
                     txt_month.setText(String.valueOf(monthOfYear+1));
                 }
@@ -169,9 +169,9 @@ public class NewBill extends Activity {
 //                        Log.d("时间测试",String.valueOf(hourOfDay));
 //                        Log.d("时间测试",String.valueOf(minute));
                         if(hourOfDay < 10){
-                            txt_minite.setText("0"+hourOfDay);
+                            txt_hour.setText("0"+hourOfDay);
                         }else {
-                            txt_minite.setText(String.valueOf(hourOfDay));
+                            txt_hour.setText(String.valueOf(hourOfDay));
                         }
                         if(minute < 10){
                             txt_minite.setText("0"+minute);
