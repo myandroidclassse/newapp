@@ -1,6 +1,8 @@
 package com.app.bookkeeping;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -217,6 +219,16 @@ public class MainActivity extends AppCompatActivity {
         setListen();
         Dao dao = new Dao();
         dao.Creat(MainActivity.this);
+        Intent intent = new Intent(this, AutoReceiver.class);
+        intent.setAction("VIDEO_TIMER");
+        PendingIntent sender = PendingIntent.getBroadcast(this, 0, intent, 0);
+        AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        // AlarmManager.ELAPSED_REALTIME_WAKEUP表示闹钟在睡眠状态下会唤醒系统并执行提示功能，该状态下闹钟使用相对时间
+        // SystemClock.elapsedRealtime()表示手机开始到现在经过的时间
+//        am.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+//                SystemClock.elapsedRealtime(), 10 * 1000, sender);
+        long triggerAtTime = System.currentTimeMillis() + 10 * 1000;
+        manager.set(AlarmManager.RTC_WAKEUP, triggerAtTime, sender);
 
     }
 
