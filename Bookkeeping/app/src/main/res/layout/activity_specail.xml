@@ -35,7 +35,7 @@
                         android:layout_marginLeft="32dp"
                         android:layout_marginTop="7dp"
                         android:layout_marginBottom="7dp"
-                        android:onClick="SetDate"
+                        android:onClick="SetDateFrom"
                         android:text="0000"
                         android:textSize="26sp" />
 
@@ -49,7 +49,7 @@
                         android:layout_marginTop="7dp"
                         android:layout_toEndOf="@+id/from_year"
                         android:layout_toRightOf="@+id/from_year"
-                        android:onClick="SetDate"
+                        android:onClick="SetDateFrom"
                         android:text="年"
                         android:textSize="26sp" />
 
@@ -63,7 +63,7 @@
                         android:layout_marginTop="7dp"
                         android:layout_toEndOf="@+id/from_month"
                         android:layout_toRightOf="@+id/from_month"
-                        android:onClick="SetDate"
+                        android:onClick="SetDateFrom"
                         android:text="月"
                         android:textSize="26sp" />
 
@@ -77,7 +77,7 @@
                         android:layout_marginTop="7dp"
                         android:layout_toEndOf="@+id/from_day"
                         android:layout_toRightOf="@+id/from_day"
-                        android:onClick="SetDate"
+                        android:onClick="SetDateFrom"
                         android:text="日"
                         android:textSize="26sp" />
 
@@ -93,7 +93,7 @@
                         android:layout_marginBottom="5dp"
                         android:layout_toEndOf="@+id/textView023"
                         android:layout_toRightOf="@+id/textView023"
-                        android:onClick="SetTime"
+                        android:onClick="SetTimeFrom"
                         android:text="00"
                         android:textSize="26sp" />
 
@@ -107,7 +107,7 @@
                         android:layout_marginTop="7dp"
                         android:layout_toEndOf="@+id/textView021"
                         android:layout_toRightOf="@+id/textView021"
-                        android:onClick="SetDate"
+                        android:onClick="SetDateFrom"
                         android:text="00"
                         android:textSize="26sp" />
 
@@ -123,7 +123,7 @@
                         android:layout_marginBottom="7dp"
                         android:layout_toEndOf="@+id/textView020"
                         android:layout_toRightOf="@+id/textView020"
-                        android:onClick="SetDate"
+                        android:onClick="SetDateFrom"
                         android:text="00"
                         android:textSize="26sp" />
 
@@ -137,7 +137,7 @@
                         android:layout_marginTop="7dp"
                         android:layout_toEndOf="@+id/from_hour"
                         android:layout_toRightOf="@+id/from_hour"
-                        android:onClick="SetTime"
+                        android:onClick="SetTimeFrom"
                         android:text=" : "
                         android:textSize="26sp" />
 
@@ -151,7 +151,7 @@
                         android:layout_marginTop="6dp"
                         android:layout_toEndOf="@+id/textView024"
                         android:layout_toRightOf="@+id/textView024"
-                        android:onClick="SetTime"
+                        android:onClick="SetTimeFrom"
                         android:text="00"
                         android:textSize="26sp" />
 
@@ -161,7 +161,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="69dp"
+            android:layout_height="67dp"
             android:orientation="horizontal">
 
             <android.support.v7.widget.CardView
@@ -184,7 +184,7 @@
                         android:layout_marginLeft="32dp"
                         android:layout_marginTop="7dp"
                         android:layout_marginBottom="7dp"
-                        android:onClick="SetDate"
+                        android:onClick="SetDateTo"
                         android:text="0000"
                         android:textSize="26sp" />
 
@@ -198,7 +198,7 @@
                         android:layout_marginTop="7dp"
                         android:layout_toEndOf="@+id/to_year"
                         android:layout_toRightOf="@+id/to_year"
-                        android:onClick="SetDate"
+                        android:onClick="SetDateTo"
                         android:text="年"
                         android:textSize="26sp" />
 
@@ -212,7 +212,7 @@
                         android:layout_marginTop="7dp"
                         android:layout_toEndOf="@+id/to_month"
                         android:layout_toRightOf="@+id/to_month"
-                        android:onClick="SetDate"
+                        android:onClick="SetDateTo"
                         android:text="月"
                         android:textSize="26sp" />
 
@@ -226,7 +226,7 @@
                         android:layout_marginTop="7dp"
                         android:layout_toEndOf="@+id/to_day"
                         android:layout_toRightOf="@+id/to_day"
-                        android:onClick="SetDate"
+                        android:onClick="SetDateTo"
                         android:text="日"
                         android:textSize="26sp" />
 
@@ -242,7 +242,7 @@
                         android:layout_marginBottom="5dp"
                         android:layout_toEndOf="@+id/textView123"
                         android:layout_toRightOf="@+id/textView123"
-                        android:onClick="SetTime"
+                        android:onClick="SetTimeTo"
                         android:text="00"
                         android:textSize="26sp" />
 
@@ -256,7 +256,7 @@
                         android:layout_marginTop="7dp"
                         android:layout_toEndOf="@+id/textView121"
                         android:layout_toRightOf="@+id/textView121"
-                        android:onClick="SetDate"
+                        android:onClick="SetDateTo"
                         android:text="00"
                         android:textSize="26sp" />
 
@@ -272,7 +272,7 @@
                         android:layout_marginBottom="7dp"
                         android:layout_toEndOf="@+id/textView120"
                         android:layout_toRightOf="@+id/textView120"
-                        android:onClick="SetDate"
+                        android:onClick="SetDateTo"
                         android:text="00"
                         android:textSize="26sp" />
 
@@ -286,7 +286,7 @@
                         android:layout_marginTop="7dp"
                         android:layout_toEndOf="@+id/to_hour"
                         android:layout_toRightOf="@+id/to_hour"
-                        android:onClick="SetTime"
+                        android:onClick="SetTimeTo"
                         android:text=" : "
                         android:textSize="26sp" />
 
@@ -300,12 +300,26 @@
                         android:layout_marginTop="6dp"
                         android:layout_toEndOf="@+id/textView124"
                         android:layout_toRightOf="@+id/textView124"
-                        android:onClick="SetTime"
+                        android:onClick="SetTimeTo"
                         android:text="00"
                         android:textSize="26sp" />
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="查询"
+                android:onClick="Select"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

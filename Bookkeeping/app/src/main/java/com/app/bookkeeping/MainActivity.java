@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,6 +21,8 @@ import android.widget.DatePicker;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.app.Adapt.AccountAdapt;
 import com.app.Adapt.BillAdapt;
@@ -91,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
             AllBillAdapt.setAssetList(ListOfAssets);
             AllBills.setAdapter(AllBillAdapt);
         }else  if (the_activity == SPECAIL_ACTIVITY){
+            getCurDateFrom();
+            getCurDateTo();
 
         }
         txt_all_money.setText("¥"+allOftheAsset.getMoney());
@@ -367,6 +372,12 @@ public class MainActivity extends AppCompatActivity {
         showDatePickerDialogFrom(MainActivity.this,3,null,calendar);
     }
 
+    public void SetTimeFrom(View view){
+        Calendar calendar = Calendar.getInstance();
+        showTimePickerDialogFrom(MainActivity.this,3,null,calendar);
+    }
+
+
     public static void showDatePickerDialogFrom(Activity activity, int themeResId, final TextView tv, Calendar calendar) {
         // 直接创建一个DatePickerDialog对话框实例，并将它显示出来
         new DatePickerDialog(activity , themeResId,new DatePickerDialog.OnDateSetListener() {
@@ -388,9 +399,45 @@ public class MainActivity extends AppCompatActivity {
                 ,calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
+    public static void showTimePickerDialogFrom(Activity activity,int themeResId, final TextView tv, Calendar calendar) {
+        // Calendar c = Calendar.getInstance();
+        // 创建一个TimePickerDialog实例，并把它显示出来
+        // 解释一哈，Activity是context的子类
+        new TimePickerDialog( activity,themeResId,
+                // 绑定监听器
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//                        Log.d("时间测试",String.valueOf(hourOfDay));
+//                        Log.d("时间测试",String.valueOf(minute));
+                        if(hourOfDay < 10){
+                            from_minite.setText("0"+hourOfDay);
+                        }else {
+                            from_minite.setText(String.valueOf(hourOfDay));
+                        }
+                        if(minute < 10){
+                            from_minite.setText("0"+minute);
+                        }else{
+                            from_minite.setText(String.valueOf(minute));
+                        }
+
+                    }
+                }
+                // 设置初始时间
+                , calendar.get(Calendar.HOUR_OF_DAY)
+                , calendar.get(Calendar.MINUTE)
+                // true表示采用24小时制
+                ,true).show();
+    }
+
     public void SetDateTo(View view){
         Calendar calendar = Calendar.getInstance();
         showDatePickerDialogTo(MainActivity.this,3,null,calendar);
+    }
+
+    public void SetTimeTo(View view){
+        Calendar calendar = Calendar.getInstance();
+        showTimePickerDialogTo(MainActivity.this,3,null,calendar);
     }
 
     public static void showDatePickerDialogTo(Activity activity, int themeResId, final TextView tv, Calendar calendar) {
@@ -415,6 +462,55 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public static void showTimePickerDialogTo(Activity activity,int themeResId, final TextView tv, Calendar calendar) {
+        // Calendar c = Calendar.getInstance();
+        // 创建一个TimePickerDialog实例，并把它显示出来
+        // 解释一哈，Activity是context的子类
+        new TimePickerDialog( activity,themeResId,
+                // 绑定监听器
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//                        Log.d("时间测试",String.valueOf(hourOfDay));
+//                        Log.d("时间测试",String.valueOf(minute));
+                        if(hourOfDay < 10){
+                            to_minite.setText("0"+hourOfDay);
+                        }else {
+                            to_minite.setText(String.valueOf(hourOfDay));
+                        }
+                        if(minute < 10){
+                            to_minite.setText("0"+minute);
+                        }else{
+                            to_minite.setText(String.valueOf(minute));
+                        }
+
+                    }
+                }
+                // 设置初始时间
+                , calendar.get(Calendar.HOUR_OF_DAY)
+                , calendar.get(Calendar.MINUTE)
+                // true表示采用24小时制
+                ,true).show();
+    }
+    public void Select(View view){
+        String from = from_year.getText().toString() + "-" + buling(from_month.getText().toString()) + "-" + buling(from_day.getText().toString()) + " " + buling(from_hour.getText().toString()) + ":" + buling(from_minite.getText().toString()) + ":00";
+        String to = to_year.getText().toString() + "-" + buling(to_month.getText().toString()) + "-" + buling(to_day.getText().toString()) + " " + buling(to_hour.getText().toString()) + ":" + buling(to_minite.getText().toString()) + ":00";
+        int aim = 0;
+        double ans = 0;
+        Dao dao = new Dao();
+        if (aim != 0){
+            ans = dao.getMoneyFromDate(MainActivity.this,aim,from,to);
+        }else{
+            ans = dao.getMoneyFromDate(MainActivity.this,from,to);
+        }
+        Toast.makeText(this,"ans="+ans,Toast.LENGTH_LONG).show();
+
+
+    }
+    public String buling(String number){
+        if(number.length()<2) return "0"+number;
+        else return number;
+    }
 
 
 }
