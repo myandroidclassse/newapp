@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 ListOfAssets.remove(0);
             }
 
+
+
             accountAdapt.setList(ListOfAssets);
             billAdapt.setList(ListOfBills);
             billAdapt.setAssetList(ListOfAssets);
@@ -87,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
             ListOfAssets.remove(0);
             AllBillAdapt.setList(ListOfAllBills);
             AllBillAdapt.setAssetList(ListOfAssets);
-
             AllBills.setAdapter(AllBillAdapt);
         }else  if (the_activity == SPECAIL_ACTIVITY){
 
@@ -213,6 +214,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Dao dao = new Dao();
+        dao.Creat(MainActivity.this);
         main_activuty = findViewById(R.id.include_main);
         list_activity = findViewById(R.id.include_list);
         specail_activity = findViewById(R.id.include_special);
