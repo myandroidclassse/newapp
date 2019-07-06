@@ -358,12 +358,14 @@ public class Dao {
         Cursor cursor = null;
         dataBase.open();
         cursor = dataBase.getAssets(0);
-        AssetsEntify asset = new AssetsEntify();
-        asset.setMoney("0");
-        asset.setID(0);
-        asset.setName("all assets's sub");
-        asset.setType(0);
-        dataBase.insertAssets_init(asset);
+        if(cursor.getCount() == 0) {
+            AssetsEntify asset = new AssetsEntify();
+            asset.setMoney("0");
+            asset.setID(0);
+            asset.setName("all assets's sub");
+            asset.setType(0);
+            dataBase.insertAssets_init(asset);
+        }
         dataBase.close();
     }
 
