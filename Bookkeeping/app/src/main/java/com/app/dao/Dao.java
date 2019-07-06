@@ -358,7 +358,7 @@ public class Dao {
         Cursor cursor = null;
         dataBase.open();
         cursor = dataBase.getAssets(0);
-        if(cursor.equals(null)) {
+        if(cursor.getCount() == 0) {
             AssetsEntify asset = new AssetsEntify();
             asset.setMoney("0");
             asset.setID(0);
