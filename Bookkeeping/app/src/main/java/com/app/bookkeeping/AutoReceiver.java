@@ -35,7 +35,7 @@ public class AutoReceiver extends BroadcastReceiver {
                     .setSmallIcon(R.drawable.bank)
                     .setTicker("TickerText:" + "记账规划生活:")
                     .setContentTitle("进行每日的记账总结吧～")
-                    .setContentText("进行每日的记账总结吧～")
+                    .setContentText("规划使生活更美好！")
                     .setContentIntent(pendingIntent).setNumber(1).build(); // 需要注意build()是在API
             // level16及之后增加的，API11可以使用getNotificatin()来替代
             notify.flags |= Notification.FLAG_AUTO_CANCEL; // FLAG_AUTO_CANCEL表明当通知被用户点击时，通知将被清除。

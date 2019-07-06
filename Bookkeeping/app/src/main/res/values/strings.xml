@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">钱簿</string>
     <string name="action_settings">Settings</string>
+    <string name="shortcut_SL">记账</string>
+    <string name="shortcut_LL">记录新账单</string>
+    <string name="shortcut_DM">sorry,there is a error.</string>
 </resources>
