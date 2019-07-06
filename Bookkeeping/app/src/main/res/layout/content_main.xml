@@ -118,7 +118,7 @@
     <ScrollView
         android:id="@+id/Line"
         android:layout_width="match_parent"
-        android:layout_height="600dp">
+        android:layout_height="557dp">
 
         <LinearLayout
             android:layout_width="match_parent"

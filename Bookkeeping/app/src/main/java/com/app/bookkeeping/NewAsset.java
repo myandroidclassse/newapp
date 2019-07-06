@@ -162,9 +162,9 @@ public class NewAsset extends AppCompatActivity {
         Dao dao = new Dao();
 
         if(dao.addNewAsset(NewAsset.this,asset) != -1) {
-            Snackbar.make(view, "添加成功", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-//            Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
+//            Snackbar.make(view, "添加成功", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
+            Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
             finish();
         }
         else {

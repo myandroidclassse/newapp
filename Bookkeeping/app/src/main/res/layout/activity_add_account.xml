@@ -188,6 +188,7 @@
         android:background="#FF274F"
         android:gravity="center|center_horizontal|center_vertical"
         android:text="保存"
+        android:radius="5dp"
         android:textColor="#F7F6EE"
         android:textSize="20sp" />
 

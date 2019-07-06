@@ -137,7 +137,9 @@ public class MainActivity extends AppCompatActivity {
         AssetList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 AccountAdapt accountAdapt = (AccountAdapt)AssetList.getAdapter();
+                if (accountAdapt.Empty) return;
                 AssetsEntify assetsEntify = accountAdapt.getItem(position);
                 Intent intent = new Intent(MainActivity.this,AssetDetail.class);
                 intent.putExtra("Asset",assetsEntify);
@@ -150,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 BillAdapt billAdapt = (BillAdapt)BillList.getAdapter();
+                if (billAdapt.Empty) return;
                 BillEntify billEntify = billAdapt.getItem(position);
                 AssetsEntify assetsEntify = billAdapt.getAsset(position);
                 Intent intent = new Intent(MainActivity.this,MyDetail.class);
@@ -165,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 BillAdapt billAdapt = (BillAdapt)AllBills.getAdapter();
+                if (billAdapt.Empty) return;
                 BillEntify billEntify = billAdapt.getItem(position);
                 AssetsEntify assetsEntify = billAdapt.getAsset(position);
                 Intent intent = new Intent(MainActivity.this,MyDetail.class);

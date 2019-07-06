@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -86,7 +87,7 @@ public class MyDetail extends Activity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updataBill();
+                updataBill(v);
             }
         });
 
@@ -314,7 +315,7 @@ public class MyDetail extends Activity {
 
 
     //点击确认按钮后修改账单(缺少数据捕获 by王家淇)
-    public void updataBill(){
+    public void updataBill(View view){
         BillEntify bill = new BillEntify();
         Date date = new Date();
         String time = txt_year.getText().toString() + "-" + txt_month.getText().toString() + "-" + txt_day.getText().toString() + " " + txt_hour.getText().toString() + ":" + txt_minite.getText().toString() + ":00";
@@ -334,7 +335,9 @@ public class MyDetail extends Activity {
             finish();
         }
         else {
-            Toast.makeText(this,"修改失败，请重试",Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this,"修改失败，请重试",Toast.LENGTH_SHORT).show();
+            Snackbar.make(view, "修改失败，请重试", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
 
     }
