@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,15 +56,17 @@ public class AssetDetail extends Activity {
         assetdetail = findViewById(R.id.card_view_asset_detial);
         Dao dao = new Dao();
 
-        List<BillEntify> ListofAsset = new LinkedList<>();
+        List<BillEntify> ListofAsset;
+        List<BillEntify> thisBills = new LinkedList<>();
         ListofAsset = dao.getBills(AssetDetail.this,0);
+
         for(int i=0;i<ListofAsset.size();i++){
-            if(ListofAsset.get(i).getFrom() != assetsEntify.getID()){
-                ListofAsset.remove(i);
+            if(ListofAsset.get(i).getFrom() == assetsEntify.getID()){
+                thisBills.add(ListofAsset.get(i));
             }
         }
 
-        billAdapt.setList(ListofAsset);
+        billAdapt.setList(thisBills);
         List<AssetsEntify> theAsset = new LinkedList<>();
         theAsset.add(assetsEntify);
         billAdapt.setAssetList(theAsset);
@@ -126,6 +129,13 @@ public class AssetDetail extends Activity {
         dialogWindow.setAttributes(lp);
         dialog.show();//显示对话框
 
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
     }
 
 }

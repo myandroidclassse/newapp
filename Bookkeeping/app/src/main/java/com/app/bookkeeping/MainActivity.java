@@ -237,8 +237,6 @@ public class MainActivity extends AppCompatActivity {
         to_year = findViewById(R.id.to_year);
         to_minite = findViewById(R.id.to_minite);
         to_hour = findViewById(R.id.to_hour);
-        Dao dao = new Dao();
-        dao.Creat(MainActivity.this);
         init();
         setListen();
         Intent intent = new Intent(this, AutoReceiver.class);
