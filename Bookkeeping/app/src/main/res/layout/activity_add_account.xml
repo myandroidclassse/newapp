@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="#E7EAEB"
+    android:orientation="vertical">
 
     <View
         android:id="@+id/view5"
@@ -61,7 +62,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light">
 
         <TextView
             android:id="@+id/textView14"
@@ -115,6 +117,7 @@
         android:id="@+id/textView13"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
         android:text="资产余额"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp" />
@@ -122,7 +125,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:background="@android:color/background_light">
 
         <TextView
             android:id="@+id/textView15"
@@ -176,13 +180,6 @@
         android:layout_gravity="center"
         android:background="#E7EAEB" />
 
-    <View
-        android:id="@+id/view9"
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:layout_gravity="center"
-        android:background="#E7EAEB" />
-
     <Button
         android:id="@+id/btn_add_asset_save"
         android:layout_width="380dp"
@@ -201,13 +198,6 @@
         android:layout_gravity="center"
         android:background="#ECE8E8" />
 
-    <View
-        android:id="@+id/view12"
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:layout_gravity="center"
-        android:background="#E7EAEB" />
-
     <Button
         android:id="@+id/btn_add_asset_qiut"
         android:layout_width="380dp"
@@ -218,5 +208,12 @@
         android:text="返回"
         android:textColor="#FF595F"
         android:textSize="20sp" />
+
+    <View
+        android:id="@+id/view12"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_gravity="center"
+        android:background="#E7EAEB" />
 
 </LinearLayout>

@@ -90,7 +90,7 @@ public class AimGridAdapt extends BaseAdapter {
                 imageView.setImageResource(R.drawable.entertainment);
                 break;
             case 3:
-                imageView.setImageResource(R.drawable.study);
+                imageView.setImageResource(R.drawable.study2);
                 break;
         }
 

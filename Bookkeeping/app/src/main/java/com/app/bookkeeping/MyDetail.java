@@ -80,7 +80,6 @@ public class MyDetail extends Activity {
         if(Bill.getFrom() != 0){
             Asset = (AssetsEntify)getIntent().getSerializableExtra("Asset");
         }
-        getCurDate();
         setDialog();
         initData();
 
@@ -105,26 +104,6 @@ public class MyDetail extends Activity {
                 deleteBill();
             }
         });
-    }
-
-    public static void getCurDate(){
-        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String time = sDateFormat.format(new java.util.Date());
-
-        String dt = time.substring(0,time.indexOf('-'));
-        time = time.substring(time.indexOf('-')+1);
-        txt_year.setText(dt);
-        dt = time.substring(0,time.indexOf('-'));
-        time = time.substring(time.indexOf('-')+1);
-        txt_month.setText(dt);
-        dt = time.substring(0,time.indexOf(' '));
-        time = time.substring(time.indexOf(' ')+1);
-        txt_day.setText(dt);
-        dt = time.substring(0,time.indexOf(':'));
-        time = time.substring(time.indexOf(':')+1);
-        txt_hour.setText(dt);
-        dt = time.substring(0,time.indexOf(':'));
-        txt_minite.setText(dt);
     }
 
     public void SetDate(View view){
@@ -225,6 +204,23 @@ public class MyDetail extends Activity {
                 aim = position + 1;
             }
         });
+
+        String time = Bill.getDateString();
+
+        String dt = time.substring(0,time.indexOf('-'));
+        time = time.substring(time.indexOf('-')+1);
+        txt_year.setText(dt);
+        dt = time.substring(0,time.indexOf('-'));
+        time = time.substring(time.indexOf('-')+1);
+        txt_month.setText(dt);
+        dt = time.substring(0,time.indexOf(' '));
+        time = time.substring(time.indexOf(' ')+1);
+        txt_day.setText(dt);
+        dt = time.substring(0,time.indexOf(':'));
+        time = time.substring(time.indexOf(':')+1);
+        txt_hour.setText(dt);
+        dt = time.substring(0,time.indexOf(':'));
+        txt_minite.setText(dt);
     }
 
 
