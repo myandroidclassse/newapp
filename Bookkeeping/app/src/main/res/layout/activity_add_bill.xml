@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorButtonNormal"
+    android:background="#E7EAEB"
     android:orientation="vertical">
 
     <View
@@ -264,7 +264,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="6dp"
                 android:layout_marginLeft="6dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="7dp"
                 android:layout_toEndOf="@+id/textView24"
                 android:layout_toRightOf="@+id/textView24"
                 android:onClick="SetTime"

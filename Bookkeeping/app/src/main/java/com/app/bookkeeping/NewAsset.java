@@ -2,7 +2,9 @@ package com.app.bookkeeping;
 
 
 import android.app.Dialog;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -32,9 +34,10 @@ import java.util.List;
 import java.util.Properties;
 
 public class NewAsset extends AppCompatActivity {
-    CardView choose_bank;
+
     private View inflate;
     private Dialog dialog;
+    CardView choose_bank;
     TextView bank_type;
     EditText editname;
     EditText editmoney;
@@ -56,7 +59,7 @@ public class NewAsset extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addAsset();
+                addAsset(v);
             }
         });
         qiut.setOnClickListener(new View.OnClickListener() {
@@ -145,19 +148,29 @@ public class NewAsset extends AppCompatActivity {
 
 
     //点击确认按钮后添加账单(缺少数据捕获 by王家淇)
-    public void addAsset(){
+    public void addAsset(View view){
         AssetsEntify asset = new AssetsEntify();
+        if(editmoney.getText().toString().isEmpty()){
+//            Toast.makeText(this,"请输入金额",Toast.LENGTH_SHORT).show();
+            Snackbar.make(view, "请输入金额", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+            return;
+        }
         asset.setName(editname.getText().toString());
         asset.setType(type);
         asset.setMoney(editmoney.getText().toString());
         Dao dao = new Dao();
 
         if(dao.addNewAsset(NewAsset.this,asset) != -1) {
-            Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
+            Snackbar.make(view, "添加成功", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+//            Toast.makeText(this,"添加成功",Toast.LENGTH_SHORT).show();
             finish();
         }
         else {
-            Toast.makeText(this,"添加失败，请重试",Toast.LENGTH_SHORT).show();
+            Snackbar.make(view, "添加失败，请重试", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+//            Toast.makeText(this,"添加失败，请重试",Toast.LENGTH_SHORT).show();
         }
     }
 }

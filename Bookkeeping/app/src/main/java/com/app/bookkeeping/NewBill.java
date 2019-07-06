@@ -293,6 +293,10 @@ public class NewBill extends Activity {
         BillEntify bill = new BillEntify();
         Date date = new Date();
         String time = txt_year.getText().toString() + "-" + txt_month.getText().toString() + "-" + txt_day.getText().toString() + " " + txt_hour.getText().toString() + ":" + txt_minite.getText().toString() + ":00";
+        if(edit_money.getText().toString().isEmpty()){
+            Toast.makeText(this,"请输入金额",Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         bill.setMoney(edit_money.getText().toString());
         bill.setAim(aim);
