@@ -480,9 +480,11 @@ public class Dao {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
         String year = String.valueOf(calendar.get(Calendar.YEAR));
-        String month = String.valueOf(calendar.get(Calendar.MONTH))+1;
+        String month = String.valueOf(calendar.get(Calendar.MONTH)+1);
         ///"yyyy-MM-dd HH:mm:ss"
-
+        if(month.length() == 1) {
+            month = "0"+month;
+        }
         String begin = year+"-"+month+"-"+"01 "+"00:00:01";
         String end = year+"-"+month+"-"+"30 "+"23:59:59";
 
