@@ -99,6 +99,7 @@ public class MyDataBase {
     //TODO 获取bill表中某时间段记录
     public Cursor getAssets(String time1,String time2){
         String sql = "select * from bill where _date >= \"" + time1 + "\" and _date <= \"" + time2 + "\" order by _date asc;";
+        //Log.e("SQL=",sql);
         Cursor cursor = mSqliteDatabase.rawQuery(sql,null);
         return cursor;
     }
