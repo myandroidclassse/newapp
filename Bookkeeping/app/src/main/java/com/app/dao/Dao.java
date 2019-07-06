@@ -182,6 +182,52 @@ public class Dao {
         return money;
     }
 
+    public double getMoneyFromDate(Context context,int type,String begin,String end){
+        double money = 0;
+        Cursor cursor = null;
+        MyDataBase dataBase = new MyDataBase(context);
+        dataBase.open();
+
+        cursor = dataBase.getAssets(begin,end,type);
+
+        if(cursor.moveToFirst()){
+            while (true){
+                String one = cursor.getString(2);
+                money += Double.valueOf(one);
+
+                if(cursor.moveToNext()) continue;
+                else break;
+            }
+            cursor.close();
+        }
+
+        dataBase.close();
+        return money;
+    }
+
+    public double getMoneyFromDate(Context context,String begin,String end){
+        double money = 0;
+        Cursor cursor = null;
+        MyDataBase dataBase = new MyDataBase(context);
+        dataBase.open();
+
+        cursor = dataBase.getAssets(begin,end);
+
+        if(cursor.moveToFirst()){
+            while (true){
+                String one = cursor.getString(2);
+                money += Double.valueOf(one);
+
+                if(cursor.moveToNext()) continue;
+                else break;
+            }
+            cursor.close();
+        }
+
+        dataBase.close();
+        return money;
+    }
+
     public int addNewBill(Context context,BillEntify bill){
         int ID = 0;
         MyDataBase dataBase = new MyDataBase(context);
@@ -233,7 +279,7 @@ public class Dao {
         dataBase.open();
         int sub = dataBase.updateBill(bill);
         if(fromold!=0){
-            Log.w("updataBill:",Double.valueOf(bill.getMoney())+"");
+            //Log.w("updataBill:",Double.valueOf(bill.getMoney())+"");
             addMoney(dataBase,fromold,Double.valueOf(moneyed));
         }
         if(fromold!=0){
@@ -453,7 +499,7 @@ public class Dao {
             newmoney = newmoney.substring(0,newmoney.indexOf(".")+3);
         }
         Asset.setMoney(newmoney);
-        Log.w("addMoney:",newmoney);
+        //Log.w("addMoney:",newmoney);
         dataBase.updateAssets(Asset);
 
     }
@@ -479,7 +525,7 @@ public class Dao {
             newmoney = newmoney.substring(0,newmoney.indexOf(".")+3);
         }
         Asset.setMoney(newmoney);
-        Log.w("desMoney:",newmoney);
+        //Log .w("desMoney:",newmoney);
         dataBase.updateAssets(Asset);
 
     }
